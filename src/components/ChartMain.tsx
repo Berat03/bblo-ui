@@ -19,36 +19,36 @@ import {
     ChartTooltipContent
 } from '@/components/ui/chart';
 const chartData = [
-    { browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
-    { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
-    { browser: 'firefox', visitors: 287, fill: 'var(--color-firefox)' },
-    { browser: 'edge', visitors: 173, fill: 'var(--color-edge)' },
-    { browser: 'other', visitors: 190, fill: 'var(--color-other)' }
+    { browser: 'level1', visitors: 275, fill: 'var(--color-level1)' },
+    { browser: 'level2', visitors: 200, fill: 'var(--color-level2)' },
+    { browser: 'level3', visitors: 287, fill: 'var(--color-level3)' },
+    { browser: 'level4', visitors: 173, fill: 'var(--color-level4)' },
+    { browser: 'Empty Spaces', visitors: 924, fill: 'var(--color-level4)' },
 ];
 
 const chartConfig = {
     visitors: {
         label: 'Visitors'
     },
-    chrome: {
-        label: 'Chrome',
+    level1: {
+        label: 'level1',
         color: 'hsl(var(--chart-1))'
     },
-    safari: {
-        label: 'Safari',
+    level2: {
+        label: 'level2',
         color: 'hsl(var(--chart-2))'
     },
-    firefox: {
-        label: 'Firefox',
+    level3: {
+        label: 'level3',
         color: 'hsl(var(--chart-3))'
     },
-    edge: {
-        label: 'Edge',
+    level4: {
+        label: 'level4',
         color: 'hsl(var(--chart-4))'
     },
-    other: {
-        label: 'Other',
-        color: 'hsl(var(--chart-5))'
+    emptySpaces: {
+        label: 'emptySpaces',
+        color: 'hsl(0, 0, 50.2)'
     }
 } satisfies ChartConfig;
 
@@ -61,12 +61,12 @@ export function ChartMain() {
         <Card className='flex flex-col'>
             <CardHeader className='items-center pb-0'>
                 <CardTitle>Pie Chart - Donut with Text</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardDescription>10th August 2024 11:50am</CardDescription>
             </CardHeader>
             <CardContent className='flex-1 pb-0'>
                 <ChartContainer
                     config={chartConfig}
-                    className='mx-auto aspect-square max-h-[250px]'
+                    className='mx-auto aspect-square max-h-[400px]'
                 >
                     <PieChart>
                         <ChartTooltip
@@ -77,7 +77,7 @@ export function ChartMain() {
                             data={chartData}
                             dataKey='visitors'
                             nameKey='browser'
-                            innerRadius={60}
+                            innerRadius={80}
                             strokeWidth={5}
                         >
                             <Label
@@ -97,14 +97,14 @@ export function ChartMain() {
                                                 <tspan
                                                     x={viewBox.cx}
                                                     y={viewBox.cy}
-                                                    className='fill-foreground text-3xl font-bold'
+                                                    className='fill-foreground text-4xl font-bold'
                                                 >
                                                     {totalVisitors.toLocaleString()}
                                                 </tspan>
                                                 <tspan
                                                     x={viewBox.cx}
-                                                    y={(viewBox.cy || 0) + 24}
-                                                    className='fill-muted-foreground'
+                                                    y={(viewBox.cy || 0) + 30}
+                                                    className='fill-muted-foreground text-lg'
                                                 >
                                                     Visitors
                                                 </tspan>
@@ -123,7 +123,7 @@ export function ChartMain() {
                     <TrendingUp className='h-4 w-4' />
                 </div>
                 <div className='leading-none text-muted-foreground'>
-                    Showing total visitors for the last 6 months
+                    Showing the current occupancy of the Billy Bryson Library
                 </div>
             </CardFooter>
         </Card>

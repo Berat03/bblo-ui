@@ -5,20 +5,20 @@ import { ChartMain } from './ChartMain';
 export const TabSwitch = () => {
     return (
         <Tabs
-            defaultValue='account'
-            className='w-screen flex flex-col justify-center'
+            defaultValue='landingPageView'
+            className='w-screen flex flex-col items-center'
         >
-            <TabsList>
+            <TabsList className='flex items-center mx-auto mt-3'>
                 <TabsTrigger value='landingPageView'>
                     Current Occupancy
                 </TabsTrigger>
                 <TabsTrigger value='detailedView'>Further Insights</TabsTrigger>
             </TabsList>
-            <TabsContent value='landingPageView'>
+            <TabsContent value='landingPageView' className='pt-5'>
                 <ChartMain />
             </TabsContent>
-            <TabsContent value='detailedView'>
-                <Charts />{' '}
+            <TabsContent value='detailedView' >
+                <Charts />
             </TabsContent>
         </Tabs>
     );
