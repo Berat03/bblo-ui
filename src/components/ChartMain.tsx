@@ -23,7 +23,7 @@ const chartData = [
     { browser: 'level2', visitors: 200, fill: 'var(--color-level2)' },
     { browser: 'level3', visitors: 287, fill: 'var(--color-level3)' },
     { browser: 'level4', visitors: 173, fill: 'var(--color-level4)' },
-    { browser: 'Empty Spaces', visitors: 924, fill: 'var(--color-level4)' },
+    { browser: 'Empty Spaces', visitors: 924, fill: 'var(--color-emptySpaces)' },
 ];
 
 const chartConfig = {
@@ -48,7 +48,7 @@ const chartConfig = {
     },
     emptySpaces: {
         label: 'emptySpaces',
-        color: 'hsl(0, 0, 50.2)'
+        color: 'hsl(var(--chart-5))'
     }
 } satisfies ChartConfig;
 
@@ -117,14 +117,14 @@ export function ChartMain() {
                     </PieChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className='flex-col gap-2 text-sm'>
+            <CardFooter className='flex-col text-sm'>
                 <div className='flex items-center gap-2 font-medium leading-none'>
                     Trending up by 5.2% this month{' '}
                     <TrendingUp className='h-4 w-4' />
                 </div>
-                <div className='leading-none text-muted-foreground'>
+                {/* <div className='leading-none text-muted-foreground'>
                     Showing the current occupancy of the Billy Bryson Library
-                </div>
+                </div> */}
             </CardFooter>
         </Card>
     );
