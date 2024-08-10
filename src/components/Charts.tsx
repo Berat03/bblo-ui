@@ -308,7 +308,7 @@ export function Charts() {
                     <CardHeader>
                         <CardTitle>Progress</CardTitle>
                         <CardDescription>
-                            You're average more steps a day this year than last
+                            You averaged more steps a day this year than last
                             year.
                         </CardDescription>
                     </CardHeader>
@@ -730,7 +730,7 @@ export function Charts() {
                     <CardHeader className='p-4 pb-0'>
                         <CardTitle>Active Energy</CardTitle>
                         <CardDescription>
-                            You're burning an average of 754 calories per day.
+                            You are burning an average of 754 calories per day.
                             Good job!
                         </CardDescription>
                     </CardHeader>
