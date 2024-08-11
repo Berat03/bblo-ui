@@ -15,7 +15,7 @@ export const TabSwitch = () => {
                 </TabsTrigger>
                 <TabsTrigger value='detailedView'>Further Insights</TabsTrigger>
             </TabsList>
-            <TabsContent value='landingPageView' className='flex flex-col sm:flex-row items-center pt-5'>
+            <TabsContent value='landingPageView' className='flex flex-col items-center pt-5'>
                 <ChartMain />
                 <BarMain/>
             </TabsContent>

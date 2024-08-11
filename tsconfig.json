@@ -13,6 +13,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "esModuleInterop": true,
     "noImplicitAny": false
   }
 }
