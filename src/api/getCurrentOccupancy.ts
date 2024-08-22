@@ -1,38 +1,32 @@
-interface OccupancyLevel {
-    free: number;
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+export interface OccupancyData {
+    Level1: number;
+    Level2e: number;
+    Level3e: number;
+    Level3nsw: number;
+    Level4e: number;
+    Level4nsw: number;
     total: number;
-    freePercentage: number;
-    usedPercentage: number;
 }
 
-interface OccupancyData {
-    telepen: OccupancyLevel;
-    Level1: OccupancyLevel;
-    Level2e: OccupancyLevel;
-    Level3e: OccupancyLevel;
-    Level3nsw: OccupancyLevel;
-    Level4e: OccupancyLevel;
-    Level4nsw: OccupancyLevel;
-}
+export const getCurrentOccupancy = async (): Promise<OccupancyData> => {
+    const response = await fetch(
+        'https://apps.dur.ac.uk/study-spaces/library/bill-bryson/occupancy/display?json&affluence'
+    );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data: any = await response.json();
 
-const getCurrentOccupancy = async () => {
-    try {
-        const response = await fetch(
-            'https://apps.dur.ac.uk/study-spaces/library/bill-bryson/occupancy/display?json&affluence'
-        );
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        } else if (response.body === null){
-            throw new Error(`Error fetching occupancy data: ${response.body}`);
-        }
-        // Type information doesn't exist at runtime, so it will be any.
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const data: OccupancyData = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error fetching occupancy data:', error);
-        throw error; // TODO: might use this to catch error up the call stack.
-    }
+    const result: OccupancyData = {
+        Level1: data.affluence.Level1.free,
+        Level2e: data.affluence.Level2e.free,
+        Level3e: data.affluence.Level3e.free,
+        Level3nsw: data.affluence.Level3nsw.free,
+        Level4e: data.affluence.Level4e.free,
+        Level4nsw: data.affluence.Level4nsw.free,
+        total: data.telepen.total
+    };
+
+    return result;
 };
 
-console.log(await getCurrentOccupancy());

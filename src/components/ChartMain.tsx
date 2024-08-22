@@ -1,8 +1,9 @@
 'use client';
 
-import * as React from 'react';
 import { TrendingUp } from 'lucide-react';
 import { Label, Pie, PieChart } from 'recharts';
+import { format } from 'date-fns';
+import { enUS } from 'date-fns/locale';
 
 import {
     Card,
@@ -18,13 +19,8 @@ import {
     ChartTooltip,
     ChartTooltipContent
 } from '@/components/ui/chart';
-const chartData = [
-    { browser: 'level1', visitors: 275, fill: 'var(--color-level1)' },
-    { browser: 'level2', visitors: 200, fill: 'var(--color-level2)' },
-    { browser: 'level3', visitors: 287, fill: 'var(--color-level3)' },
-    { browser: 'level4', visitors: 173, fill: 'var(--color-level4)' },
-    { browser: 'Empty Spaces', visitors: 924, fill: 'var(--color-emptySpaces)' },
-];
+import { useEffect, useState } from 'react';
+import { getCurrentOccupancy } from '@/api/getCurrentOccupancy';
 
 const chartConfig = {
     visitors: {
@@ -52,16 +48,83 @@ const chartConfig = {
     }
 } satisfies ChartConfig;
 
+const initChartData = [
+    { level: 'level1', visitors: 0, fill: 'var(--color-level1)' },
+    { LucideMoveLeft: 'level2', visitors: 0, fill: 'var(--color-level2)' },
+    { LucideMoveLeft: 'level3', visitors: 0, fill: 'var(--color-level3)' },
+    { level: 'level4', visitors: 0, fill: 'var(--color-level4)' },
+    {
+        LucideMoveLeft: 'Empty Spaces',
+        visitors: 0,
+        fill: 'var(--color-emptySpaces)'
+    }
+];
+
+const formatDate = (date: Date) => {
+    return format(date, 'do MMMM yyyy h:mma', { locale: enUS });
+};
+const now = new Date();
+const formattedDate = formatDate(now);
+
 export function ChartMain() {
-    const totalVisitors = React.useMemo(() => {
-        return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+    const [chartData, setChartData] = useState(initChartData);
+    const [totalVisitors, setTotalVisitors] = useState(0);
+    const [currentDate, setCurrentDate] = useState(formattedDate);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const occupancyData = await getCurrentOccupancy();
+
+            const total = occupancyData.total;
+            setTotalVisitors(total);
+
+            setChartData([
+                {
+                    level: 'level1',
+                    visitors: occupancyData.Level1,
+                    fill: 'var(--color-level1)'
+                },
+                {
+                    level: 'level2',
+                    visitors: occupancyData.Level2e,
+                    fill: 'var(--color-level2)'
+                },
+                {
+                    level: 'level3',
+                    visitors: occupancyData.Level3e,
+                    fill: 'var(--color-level3)'
+                },
+                {
+                    level: 'level4',
+                    visitors: occupancyData.Level4e,
+                    fill: 'var(--color-level4)'
+                },
+                {
+                    level: 'Empty Spaces',
+                    visitors: Math.max(
+                        total -
+                            (occupancyData.Level1 +
+                                occupancyData.Level2e +
+                                occupancyData.Level3e +
+                                occupancyData.Level4e),
+                        0
+                    ),
+                    fill: 'var(--color-emptySpaces)'
+                }
+            ]);
+            const now = new Date();
+            const formattedDate = formatDate(now);
+            setCurrentDate(formattedDate);
+        };
+
+        void fetchData();
     }, []);
 
     return (
         <Card className='flex flex-col'>
             <CardHeader className='items-center pb-0'>
-                <CardTitle>Pie Chart - Donut with Text</CardTitle>
-                <CardDescription>10th August 2024 11:50am</CardDescription>
+                <CardTitle>Occupancy at Bill Bryson </CardTitle>
+                <CardDescription>{currentDate}</CardDescription>
             </CardHeader>
             <CardContent className='flex-1 pb-0'>
                 <ChartContainer
@@ -76,7 +139,7 @@ export function ChartMain() {
                         <Pie
                             data={chartData}
                             dataKey='visitors'
-                            nameKey='browser'
+                            nameKey='LucideMoveLeft'
                             innerRadius={80}
                             strokeWidth={5}
                         >
