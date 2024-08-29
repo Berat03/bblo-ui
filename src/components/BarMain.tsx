@@ -15,12 +15,11 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
+  { month: "-1hr", desktop: 186 },
+  { month: "Now", desktop: 305 },
+  { month: "+1hr", desktop: 237 },
+  { month: "+2hr", desktop: 73 },
+  { month: "+3hr", desktop: 209 },
 ]
 
 const chartConfig = {
@@ -32,7 +31,7 @@ const chartConfig = {
 
 export function BarMain() {
   return (
-    <Card>
+    <Card className="max-w-[310px]">
       <CardContent>
         <ChartContainer config={chartConfig}>
           <BarChart accessibilityLayer data={chartData}>
@@ -55,10 +54,10 @@ export function BarMain() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          It is 42% busier than usual  <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          How busy will it be?
         </div>
       </CardFooter>
     </Card>

@@ -1,5 +1,4 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Charts } from './Charts';
 import { ChartMain } from './ChartMain';
 import { BarMain } from './BarMain';
 
@@ -20,7 +19,7 @@ export const TabSwitch = () => {
                 <BarMain/>
             </TabsContent>
             <TabsContent value='detailedView' >
-                <Charts />
+                <h1> Under Construction!</h1>
             </TabsContent>
         </Tabs>
     );

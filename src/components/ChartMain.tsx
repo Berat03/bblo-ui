@@ -169,7 +169,7 @@ export function ChartMain() {
                                                     y={(viewBox.cy || 0) + 30}
                                                     className='fill-muted-foreground text-lg'
                                                 >
-                                                    Visitors
+                                                    Free spaces
                                                 </tspan>
                                             </text>
                                         );

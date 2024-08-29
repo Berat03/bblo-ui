@@ -24,7 +24,7 @@ export const getCurrentOccupancy = async (): Promise<OccupancyData> => {
         Level3nsw: data.affluence.Level3nsw.free,
         Level4e: data.affluence.Level4e.free,
         Level4nsw: data.affluence.Level4nsw.free,
-        total: data.telepen.total
+        total: data.telepen.free
     };
 
     return result;
