@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { RenderDonut } from './donut/renderDonut';
+import { MiniBar } from './bar/miniBar';
+import { RadialDonut } from './donut/radialDonut';
 
 export const TabSwitch = () => {
     return (
@@ -11,13 +12,21 @@ export const TabSwitch = () => {
                 <TabsTrigger value='landingPageView'>
                     Current Occupancy
                 </TabsTrigger>
-                <TabsTrigger value='detailedView'>Further Insights</TabsTrigger>
+                <TabsTrigger value='detailedView'>
+                    Get Further Insights
+                </TabsTrigger>
             </TabsList>
             {/** --------------------------------------------------------------------------- */}
-            <TabsContent value='landingPageView' className='flex flex-col items-center pt-5'>
-                <RenderDonut />
+            <TabsContent
+                value='landingPageView'
+                className='flex flex-col items-center'
+            >
+                <div className='pt-2'>
+                    <RadialDonut />
+                    <MiniBar />
+                </div>
             </TabsContent>
-            <TabsContent value='detailedView' >
+            <TabsContent value='detailedView'>
                 <h1>UNDER CONSTRUCTION</h1>
             </TabsContent>
         </Tabs>

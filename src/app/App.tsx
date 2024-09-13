@@ -1,10 +1,12 @@
-import { TabSwitch } from '@/components/TabSwitch';
+import { LandingPage } from '@/components/landingPage';
+
+import { ThemeProvider } from '@/components/theme-provider';
 
 function App() {
     return (
-        <div className='flex justify-center flex-col w-screen '>
-            <TabSwitch />
-        </div>
+        <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
+            <LandingPage/>
+        </ThemeProvider>
     );
 }
 
