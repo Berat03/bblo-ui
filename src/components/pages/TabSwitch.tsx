@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { MiniBar } from './bar/miniBar';
-import { RadialDonut } from './donut/radialDonut';
+import { LandingPage } from './landingPage/landingPage';
+import { ExtraPage } from './extraPage/extraPage';
 
 export const TabSwitch = () => {
     return (
@@ -22,12 +22,11 @@ export const TabSwitch = () => {
                 className='flex flex-col items-center'
             >
                 <div className='pt-2'>
-                    <RadialDonut />
-                    <MiniBar />
+                    <LandingPage />
                 </div>
             </TabsContent>
             <TabsContent value='detailedView'>
-                <h1>UNDER CONSTRUCTION</h1>
+                <ExtraPage/>
             </TabsContent>
         </Tabs>
     );

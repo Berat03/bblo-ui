@@ -34,11 +34,12 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function RadialDonut() {
+    const currentDate = new Date().toLocaleString(); // TODO: This doesn't update in real time.
     return (
         <Card className='flex flex-col'>
             <CardHeader className='items-center pb-0'>
                 <CardTitle>Current Occupancy</CardTitle>
-                <CardDescription>17:30 Tuesday 17th Sep 2024</CardDescription>
+                <CardDescription>{currentDate}</CardDescription>
             </CardHeader>
             <CardContent className='flex-1 pb-0'>
                 <ChartContainer

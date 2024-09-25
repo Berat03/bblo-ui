@@ -1,11 +1,11 @@
-import { LandingPage } from '@/components/landingPage';
+import { HomePage } from '@/app/homePage';
 
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from '@/components/darkMode/theme-provider';
 
 function App() {
     return (
         <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
-            <LandingPage/>
+            <HomePage />
         </ThemeProvider>
     );
 }
