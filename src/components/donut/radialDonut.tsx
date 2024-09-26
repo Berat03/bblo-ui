@@ -18,6 +18,7 @@ import {
     CardTitle
 } from '@/components/ui/card';
 import { ChartConfig, ChartContainer } from '@/components/ui/chart';
+import { FormattedLiveDateTime } from '../date/formattedLiveDateTime';
 
 const chartData = [
     { browser: 'safari', visitors: 1260, fill: 'var(--color-safari)' }
@@ -34,12 +35,13 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function RadialDonut() {
-    const currentDate = new Date().toLocaleString(); // TODO: This doesn't update in real time.
     return (
         <Card className='flex flex-col'>
             <CardHeader className='items-center pb-0'>
                 <CardTitle>Current Occupancy</CardTitle>
-                <CardDescription>{currentDate}</CardDescription>
+                <CardDescription>
+                    <FormattedLiveDateTime />
+                </CardDescription>
             </CardHeader>
             <CardContent className='flex-1 pb-0'>
                 <ChartContainer

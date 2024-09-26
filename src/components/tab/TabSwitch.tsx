@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LandingPage } from './landingPage/landingPage';
-import { ExtraPage } from './extraPage/extraPage';
+import { LandingView } from '../views/landingView/landingView';
+import { AlternateView } from '../views/alternativeView/alternateView';
 
 export const TabSwitch = () => {
     return (
@@ -8,7 +8,7 @@ export const TabSwitch = () => {
             defaultValue='landingPageView'
             className='w-screen flex flex-col items-center'
         >
-            <TabsList className='flex items-center mx-auto mt-3'>
+            <TabsList className='flex items-center mt-3'>
                 <TabsTrigger value='landingPageView'>
                     Current Occupancy
                 </TabsTrigger>
@@ -22,11 +22,11 @@ export const TabSwitch = () => {
                 className='flex flex-col items-center'
             >
                 <div className='pt-2'>
-                    <LandingPage />
+                    <LandingView />
                 </div>
             </TabsContent>
             <TabsContent value='detailedView'>
-                <ExtraPage/>
+                <AlternateView />
             </TabsContent>
         </Tabs>
     );
