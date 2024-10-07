@@ -12,7 +12,6 @@ export const FormattedLiveDateTime = (props: FormattedLiveDateTimeProps) => {
         minute: '2-digit',
         hour12: false // 24-hour format
     });
-    console.log('refreshed');
     return (
         <>
             {formattedDate} {formattedTime}

@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LandingView } from '../views/landingView/landingView';
-import { AlternateView } from '../views/alternativeView/alternateView';
+import { InfoSeparator } from '../info/infoSeparator';
+import { RadialDonut } from '../donut/radialDonut';
+import { MiniBar } from '../bar/miniBar';
 
 export const TabSwitch = () => {
     return (
@@ -22,11 +23,19 @@ export const TabSwitch = () => {
                 className='flex flex-col items-center'
             >
                 <div className='pt-2'>
-                    <LandingView />
+                    <div className='flex flex-col sm:flex-row justify-between'>
+                        <RadialDonut />
+                        <div
+                            id='separator'
+                            className='pr-0 pl-0 sm:pr-2 sm:pl-2 pt-4 sm:pt-0'
+                        ></div>
+                        <MiniBar />
+                    </div>
+                    <InfoSeparator />
                 </div>
             </TabsContent>
             <TabsContent value='detailedView'>
-                <AlternateView />
+                <h1>UNDER CONSTRUCTION</h1>
             </TabsContent>
         </Tabs>
     );

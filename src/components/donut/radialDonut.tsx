@@ -1,13 +1,10 @@
 'use client';
 
 import { ChartConfig } from '@/components/ui/chart';
-import { getCurrentOccupancy } from '@/api/getCurrentOccupancy';
-import { useEffect, useState } from 'react';
-import { RenderRadialDonut } from './renderRadiaDonut';
-
-const initChartData = [
-    { browser: 'Visitors', visitors: 1800, fill: 'var(--color-safari)' }
-];
+import { OccupancyData } from '@/api/getCurrentOccupancy';
+import { useContext, useEffect, useState } from 'react';
+import { RenderRadialDonut } from './renderRadialDonut';
+import OccupancyContext from '../context/occupancyContext';
 
 const chartConfig = {
     visitors: {
@@ -20,18 +17,15 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function RadialDonut() {
-    const [chartData, setChartData] = useState(initChartData);
-    const fetchData = async () => {
-        const occupancyData = await getCurrentOccupancy();
-        setChartData([
-            {
-                browser: 'Visitors',
-                visitors: occupancyData.total,
-                fill: 'var(--color-safari)'
-            }
-        ]);
-    };
-    fetchData();
+    const currentOccupancyData: OccupancyData = useContext(OccupancyContext);
+
+    const chartData = [
+        {
+            browser: 'Visitors',
+            visitors: currentOccupancyData.total,
+            fill: 'var(--color-safari)'
+        }
+    ];
 
     const maximumCapacity = 1800;
     const percentageCapacityFull = chartData[0].visitors / maximumCapacity;
@@ -42,11 +36,10 @@ export function RadialDonut() {
     useEffect(() => {
         const timer = setInterval(() => {
             setDate(new Date());
-        }, 60000); // Updates every minute
-
+        }, 10000); // Updates every minute
+        console.log('timer');
         return () => clearInterval(timer);
     }, []);
-    console.log('Rerender all')
     return (
         <RenderRadialDonut
             barAngle={barAngle}

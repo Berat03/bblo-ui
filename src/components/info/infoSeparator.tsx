@@ -1,7 +1,6 @@
 import { Separator } from '@/components/ui/separator';
 
 export function InfoSeparator() {
-    console.log('refresh')
     return (
         <div className='p-5'>
             <div className='space-y-1'>

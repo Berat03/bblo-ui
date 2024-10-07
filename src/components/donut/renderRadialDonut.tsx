@@ -29,7 +29,6 @@ interface RenderRadialDonutProps {
 }
 
 export const RenderRadialDonut = (props: RenderRadialDonutProps ) => {
-    console.log('renderRadial')
     return (
         <Card className='flex flex-col'>
             <CardHeader className='items-center pb-0'>
