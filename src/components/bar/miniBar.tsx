@@ -19,26 +19,31 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-
-const chartData = [
-  { month: "1", desktop: 186, mobile: 80 },
-  { month: "2", desktop: 305, mobile: 200 },
-  { month: "3", desktop: 237, mobile: 120 },
-  { month: "4", desktop: 73, mobile: 190 },
-]
+import { useContext } from "react"
+import OccupancyContext from "../context/occupancyContext"
 
 const chartConfig = {
-  desktop: {
-    label: "Maximum Capacity",
+  current: {
+    label: "Current Occupancy",
     color: "hsl(var(--chart-1))",
   },
-  mobile: {
-    label: "Current Occupancy",
+  maximum: {
+    label: "Maximum Capacity",
     color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig
 
 export function MiniBar() {
+  const occupancyData = useContext(OccupancyContext);
+  const chartData = [
+    { Level1: "1", current: occupancyData.Level1, maximum: 200 },
+    { Level2: "2", current: occupancyData.Level2e, maximum: 300 },
+    { Level3: "3", current: occupancyData.Level3e + occupancyData.Level3nsw, maximum: 400 },
+    { Level4: "4", current: occupancyData.Level4nsw + occupancyData.Level4e, maximum: 400 },
+  ]
+
+
+
   return (
     <Card>
       <CardHeader>
@@ -59,15 +64,15 @@ export function MiniBar() {
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             <ChartLegend content={<ChartLegendContent />} />
             <Bar
-              dataKey="desktop"
+              dataKey="maximum"
               stackId="a"
-              fill="var(--color-desktop)"
+              fill="var(--color-maximum)"
               radius={[0, 0, 4, 4]}
             />
             <Bar
-              dataKey="mobile"
+              dataKey="current"
               stackId="a"
-              fill="var(--color-mobile)"
+              fill="var(--color-current)"
               radius={[4, 4, 0, 0]}
             />
           </BarChart>
