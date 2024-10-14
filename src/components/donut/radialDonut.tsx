@@ -15,8 +15,10 @@ const chartConfig = {
         color: 'hsl(var(--chart-2))'
     }
 } satisfies ChartConfig;
-
-export function RadialDonut() {
+interface RadialDonutProps {
+    date: Date
+}
+export function RadialDonut(props: RadialDonutProps) {
     const currentOccupancyData: OccupancyData = useContext(OccupancyContext);
 
     const chartData = [
@@ -31,21 +33,13 @@ export function RadialDonut() {
     const percentageCapacityFull = chartData[0].visitors / maximumCapacity;
     const barAngle = percentageCapacityFull * 360;
 
-    const [date, setDate] = useState(new Date());
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setDate(new Date());
-        }, 10000); // Updates every minute
-        console.log('timer');
-        return () => clearInterval(timer);
-    }, []);
     return (
         <RenderRadialDonut
             barAngle={barAngle}
             chartData={chartData}
             chartConfig={chartConfig}
-            date={date}
+            date={props.date}
         />
     );
 }

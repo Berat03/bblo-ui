@@ -3,7 +3,10 @@ import { InfoSeparator } from '../info/infoSeparator';
 import { RadialDonut } from '../donut/radialDonut';
 import { MiniBar } from '../bar/miniBar';
 
-export const TabSwitch = () => {
+interface TabSwitchProps {
+    date: Date
+}
+export const TabSwitch = (props: TabSwitchProps) => {
     return (
         <Tabs
             defaultValue='landingPageView'
@@ -24,7 +27,7 @@ export const TabSwitch = () => {
             >
                 <div className='pt-2'>
                     <div className='flex flex-col sm:flex-row justify-between'>
-                        <RadialDonut />
+                        <RadialDonut date={props.date} />
                         <div
                             id='separator'
                             className='pr-0 pl-0 sm:pr-2 sm:pl-2 pt-4 sm:pt-0'

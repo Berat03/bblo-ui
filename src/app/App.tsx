@@ -15,26 +15,33 @@ function App() {
         total: 1800
     });
 
-    useEffect(() => {
-        const fetchOccData = async () => {
-            const occupancyData = await getCurrentOccupancy();
-            if (occupancyData) {
-                setMyData(occupancyData);
-            } else {
-                // There was an error fetching the data
-                // Fall back values? Refactor this!
-            }
-        };
+    const fetchOccData = async () => {
+        const occupancyData = await getCurrentOccupancy();
+        if (occupancyData) {
+            setMyData(occupancyData);
+        } else {
+            // There was an error fetching the data
+            // Fall back values? Refactor this!
+        }
+    };
+    const [date, setDate] = useState(new Date());
 
-        fetchOccData();
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setDate(new Date());
+            fetchOccData();
+            console.log(currentOccupancyData)
+        }, 5000);        
+        return () => clearInterval(timer);
     }, []);
+
 
     return (
         <>
         <OccupancyContext.Provider value={currentOccupancyData}>
             <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
                 <div className='flex flex-row items-start p-2'>
-                    <TabSwitch />
+                    <TabSwitch date={date}/>
                 </div>
             </ThemeProvider>
         </OccupancyContext.Provider>
