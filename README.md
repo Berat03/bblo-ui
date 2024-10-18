@@ -2,4 +2,8 @@
 
 # Build with:
 
-# Get start
+
+# Get started:
+JIRA: https://beratbulbul.atlassian.net/jira/software/projects/BBLO/boards/2
+
+Current Hosted Link: http://bblopublicbucket.s3-website.eu-west-2.amazonaws.com/
