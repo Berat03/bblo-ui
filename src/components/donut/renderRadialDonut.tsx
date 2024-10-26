@@ -24,23 +24,23 @@ interface RenderRadialDonutProps {
         browser: string;
         visitors: number;
         fill: string;
-      }[]
-      date:any;
+    }[];
+    date: any;
 }
 
-export const RenderRadialDonut = (props: RenderRadialDonutProps ) => {
+export const RenderRadialDonut = (props: RenderRadialDonutProps) => {
     return (
         <Card className='flex flex-col'>
             <CardHeader className='items-center pb-0 mb-0'>
                 <CardTitle>Current Occupancy</CardTitle>
                 <CardDescription>
-                    <FormattedLiveDateTime date={props.date}/>
+                    <FormattedLiveDateTime date={props.date} />
                 </CardDescription>
             </CardHeader>
             <CardContent className='flex-1 pb-0 '>
                 <ChartContainer
                     config={props.chartConfig}
-                    className='mx-auto aspect-square max-h-[250px]'
+                    className='mx-auto aspect-square max-h-[220px]'
                 >
                     <RadialBarChart
                         data={props.chartData}
@@ -100,11 +100,11 @@ export const RenderRadialDonut = (props: RenderRadialDonutProps ) => {
             </CardContent>
             <CardFooter className='flex-col gap-2 text-sm'>
                 <div className='flex items-center gap-2 font-medium leading-none'>
-                    Trending up by 5.2% this month{' '}
+                    Trending up by 16% this month
                     <TrendingUp className='h-4 w-4' />
                 </div>
                 <div className='leading-none text-muted-foreground'>
-                    Showing total visitors for the last 6 months
+                    Displaying total available free spaces
                 </div>
             </CardFooter>
         </Card>

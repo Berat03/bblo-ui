@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { InfoSeparator } from '../info/infoSeparator';
 import { RadialDonut } from '../donut/radialDonut';
-import { MiniBar } from '../bar/miniBar';
+import { IndividualFloorBarChart } from '../bar/IndividualFloorBarChart';
 
 interface TabSwitchProps {
     date: Date;
@@ -17,7 +17,7 @@ export const TabSwitch = (props: TabSwitchProps) => {
                     Current Occupancy
                 </TabsTrigger>
                 <TabsTrigger value='detailedView'>
-                    Get Further Insights
+                    Further Insights
                 </TabsTrigger>
             </TabsList>
             {/** --------------------------------------------------------------------------- */}
@@ -29,7 +29,7 @@ export const TabSwitch = (props: TabSwitchProps) => {
                     <div className='flex flex-col sm:flex-row justify-between'>
                         <RadialDonut date={props.date} />
                         <div className='pr-0 pl-0 sm:pr-2 sm:pl-2 pt-4 sm:pt-0'></div>
-                        <MiniBar />
+                        <IndividualFloorBarChart />
                     </div>
                     <div className='pt-4'></div>
                     <InfoSeparator />
