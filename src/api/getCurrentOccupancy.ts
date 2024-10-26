@@ -16,7 +16,6 @@ export const getCurrentOccupancy = async (): Promise<OccupancyData> => {
     );
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data: any = await response.json();
-
     const result: OccupancyData = {
         Level1: data.affluence.Level1.free,
         Level2e: data.affluence.Level2e.free,

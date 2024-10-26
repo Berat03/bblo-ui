@@ -31,13 +31,13 @@ interface RenderRadialDonutProps {
 export const RenderRadialDonut = (props: RenderRadialDonutProps ) => {
     return (
         <Card className='flex flex-col'>
-            <CardHeader className='items-center pb-0'>
+            <CardHeader className='items-center pb-0 mb-0'>
                 <CardTitle>Current Occupancy</CardTitle>
                 <CardDescription>
                     <FormattedLiveDateTime date={props.date}/>
                 </CardDescription>
             </CardHeader>
-            <CardContent className='flex-1 pb-0'>
+            <CardContent className='flex-1 pb-0 '>
                 <ChartContainer
                     config={props.chartConfig}
                     className='mx-auto aspect-square max-h-[250px]'
@@ -45,8 +45,8 @@ export const RenderRadialDonut = (props: RenderRadialDonutProps ) => {
                     <RadialBarChart
                         data={props.chartData}
                         endAngle={props.barAngle}
-                        innerRadius={80}
-                        outerRadius={140}
+                        innerRadius={85}
+                        outerRadius={150}
                     >
                         <PolarGrid
                             gridType='circle'

@@ -2,7 +2,7 @@
 
 import { ChartConfig } from '@/components/ui/chart';
 import { OccupancyData } from '@/api/getCurrentOccupancy';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { RenderRadialDonut } from './renderRadialDonut';
 import OccupancyContext from '../context/occupancyContext';
 

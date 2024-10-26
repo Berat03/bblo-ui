@@ -20,8 +20,7 @@ function App() {
         if (occupancyData) {
             setMyData(occupancyData);
         } else {
-            // There was an error fetching the data
-            // Fall back values? Refactor this!
+            console.log('Error calling API for occupancy.');
         }
     };
     const [date, setDate] = useState(new Date());
@@ -30,8 +29,7 @@ function App() {
         const timer = setInterval(() => {
             setDate(new Date());
             fetchOccData();
-            console.log(currentOccupancyData)
-        }, 5000);        
+        }, 1000);        
         return () => clearInterval(timer);
     }, []);
 

@@ -4,7 +4,7 @@ import { RadialDonut } from '../donut/radialDonut';
 import { MiniBar } from '../bar/miniBar';
 
 interface TabSwitchProps {
-    date: Date
+    date: Date;
 }
 export const TabSwitch = (props: TabSwitchProps) => {
     return (
@@ -28,17 +28,15 @@ export const TabSwitch = (props: TabSwitchProps) => {
                 <div className='pt-2'>
                     <div className='flex flex-col sm:flex-row justify-between'>
                         <RadialDonut date={props.date} />
-                        <div
-                            id='separator'
-                            className='pr-0 pl-0 sm:pr-2 sm:pl-2 pt-4 sm:pt-0'
-                        ></div>
+                        <div className='pr-0 pl-0 sm:pr-2 sm:pl-2 pt-4 sm:pt-0'></div>
                         <MiniBar />
                     </div>
+                    <div className='pt-4'></div>
                     <InfoSeparator />
                 </div>
             </TabsContent>
             <TabsContent value='detailedView'>
-                <h1>UNDER CONSTRUCTION</h1>
+                <h1>🚧 UNDER CONSTRUCTION 🚧</h1>
             </TabsContent>
         </Tabs>
     );
