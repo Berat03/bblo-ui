@@ -1,6 +1,5 @@
 'use client';
 
-import { TrendingUp } from 'lucide-react';
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 
 import {
@@ -27,12 +26,12 @@ export const description = 'A stacked bar chart with a legend';
 
 
 const chartConfig = {
-    desktop: {
-        label: 'Desktop',
+    current: {
+        label: 'Current',
         color: 'hsl(var(--chart-1))'
     },
-    mobile: {
-        label: 'Mobile',
+    maximum: {
+        label: 'Maximum',
         color: 'hsl(var(--chart-2))'
     }
 } satisfies ChartConfig;
@@ -40,12 +39,12 @@ const chartConfig = {
 export function IndividualFloorBarChart() {
     const occupancyData = useContext(OccupancyContext);
     const chartData = [
-      { month: 'L1', desktop: occupancyData.Level1, mobile: 80 },
-      { month: 'L2', desktop: occupancyData.Level2e, mobile: 200 },
-      { month: 'L3 NSW', desktop: occupancyData.Level3nsw, mobile: 120 },
-      { month: 'L3 E', desktop: occupancyData.Level3e, mobile: 190 },
-      { month: 'L4 NSW', desktop: occupancyData.Level4nsw, mobile: 130 },
-      { month: 'L4 E', desktop: occupancyData.Level4e, mobile: 152 }
+      { month: 'L1', current: occupancyData.Level1, maximum: 80 },
+      { month: 'L2', current: occupancyData.Level2e, maximum: 200 },
+      { month: 'L3', current: occupancyData.Level3nsw, maximum: 120 },
+      { month: 'L3E', current: occupancyData.Level3e, maximum: 190 },
+      { month: 'L4', current: occupancyData.Level4nsw, maximum: 130 },
+      { month: 'L4E', current: occupancyData.Level4e, maximum: 152 }
   ];
     console.log(occupancyData);
     return (
@@ -70,15 +69,15 @@ export function IndividualFloorBarChart() {
                         />
                         <ChartLegend content={<ChartLegendContent />} />
                         <Bar
-                            dataKey='desktop'
+                            dataKey='current'
                             stackId='a'
-                            fill='var(--color-desktop)'
+                            fill='var(--color-current)'
                             radius={[0, 0, 4, 4]}
                         />
                         <Bar
-                            dataKey='mobile'
+                            dataKey='maximum'
                             stackId='a'
-                            fill='var(--color-mobile)'
+                            fill='var(--color-maximum)'
                             radius={[4, 4, 0, 0]}
                         />
                     </BarChart>

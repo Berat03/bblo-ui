@@ -6,13 +6,13 @@ import { useEffect, useState } from 'react';
 
 function App() {
     const [currentOccupancyData, setMyData] = useState<OccupancyData>({
-        Level1: 100,
-        Level2e: 101,
-        Level3e: 102,
-        Level3nsw: 103,
-        Level4e: 104,
-        Level4nsw: 105,
-        total: 1800
+        Level1: 0,
+        Level2e: 0,
+        Level3e: 0,
+        Level3nsw: 0,
+        Level4e: 0,
+        Level4nsw: 0,
+        total: 0
     });
 
     const fetchOccData = async () => {
@@ -24,7 +24,7 @@ function App() {
         }
     };
     const [date, setDate] = useState(new Date());
-
+    
     useEffect(() => {
         const timer = setInterval(() => {
             setDate(new Date());
