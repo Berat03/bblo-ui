@@ -1,8 +1,4 @@
 # About the project  
-
-# Build with:
-
-
 # Get started:
 JIRA: https://beratbulbul.atlassian.net/jira/software/projects/BBLO/boards/2
 
