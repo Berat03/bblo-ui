@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { InfoSeparator } from '../info/infoSeparator';
 import { RadialDonut } from '../donut/radialDonut';
 import { IndividualFloorBarChart } from '../bar/IndividualFloorBarChart';
+import { ForecastingLineChart } from '../forecastingLineChart/forecastingLineChart';
 
 interface TabSwitchProps {
     date: Date;
@@ -36,7 +37,7 @@ export const TabSwitch = (props: TabSwitchProps) => {
                 </div>
             </TabsContent>
             <TabsContent value='detailedView'>
-                <h1>🚧 UNDER CONSTRUCTION 🚧</h1>
+                <ForecastingLineChart/>
             </TabsContent>
         </Tabs>
     );
