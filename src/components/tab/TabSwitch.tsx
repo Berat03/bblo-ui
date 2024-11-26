@@ -13,7 +13,7 @@ export const TabSwitch = (props: TabSwitchProps) => {
             defaultValue='landingPageView'
             className='w-screen flex flex-col items-center'
         >
-            <TabsList className='flex items-center mt-3'>
+            <TabsList className='flex items-center mt-2'>
                 <TabsTrigger value='landingPageView'>
                     Current Occupancy
                 </TabsTrigger>

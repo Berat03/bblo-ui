@@ -28,7 +28,6 @@ const chartData = [
   { date: "2024-04-08", total: 894, level1: 409, level2: 320, level3: 110, level4: 55 },
   { date: "2024-04-09", total: 219, level1: 59, level2: 110, level3: 30, level4: 20 },
   { date: "2024-04-10", total: 556, level1: 261, level2: 190, level3: 70, level4: 35 },
-  // Add additional data as needed for your use case
 ]
 
 const chartConfig = {
@@ -65,7 +64,7 @@ export function ForecastingLineChart() {
   const [activeChart, setActiveChart] =
     React.useState<keyof typeof chartConfig>("total")
   const [selectedInterval, setSelectedInterval] = React.useState<number>(3)
-  // Need to implement changing the X (Y?) axis and getting new data.
+
   const total = React.useMemo(
     () => ({
       total: chartData.reduce((acc, curr) => acc + curr.total, 0),
@@ -83,7 +82,7 @@ export function ForecastingLineChart() {
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
           <CardTitle>Future Occupancy</CardTitle>
           <CardDescription>
-            Showing predicted visitors for the next {" "}
+            Showing predicted visitors for the next{" "}
             <select
               value={selectedInterval}
               onChange={(e) => setSelectedInterval(Number(e.target.value))}
@@ -97,25 +96,39 @@ export function ForecastingLineChart() {
             </select>
           </CardDescription>
         </div>
-        <div className="flex">
-          {["total", "level1", "level2", "level3", "level4"].map((key) => {
-            const chart = key as keyof typeof chartConfig
-            return (
-              <button
-                key={chart}
-                data-active={activeChart === chart}
-                className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
-                onClick={() => setActiveChart(chart)}
-              >
-                <span className="text-xs text-muted-foreground">
-                  {chartConfig[chart].label}
-                </span>
-                <span className="text-lg font-bold leading-none sm:text-3xl">
-                  {total[key as keyof typeof total].toLocaleString()}
-                </span>
-              </button>
-            )
-          })}
+        <div className="flex flex-col sm:flex-row">
+          <button
+            data-active={activeChart === "total"}
+            className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
+            onClick={() => setActiveChart("total")}
+          >
+            <span className="text-xs text-muted-foreground">
+              {chartConfig["total"].label}
+            </span>
+            <span className="text-lg font-bold leading-none sm:text-3xl">
+              {total["total"].toLocaleString()}
+            </span>
+          </button>
+          <div className="hidden md:flex">
+            {["level1", "level2", "level3", "level4"].map((key) => {
+              const chart = key as keyof typeof chartConfig
+              return (
+                <button
+                  key={chart}
+                  data-active={activeChart === chart}
+                  className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
+                  onClick={() => setActiveChart(chart)}
+                >
+                  <span className="text-xs text-muted-foreground">
+                    {chartConfig[chart].label}
+                  </span>
+                  <span className="text-lg font-bold leading-none sm:text-3xl">
+                    {total[chart].toLocaleString()}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
         </div>
       </CardHeader>
       <CardContent className="px-2 sm:p-6">
@@ -150,8 +163,8 @@ export function ForecastingLineChart() {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              domain={[0, "dataMax + 50"]} // Adjust the domain to add padding
-              tickFormatter={(value) => `${value}`} // Customize format if needed
+              domain={[0, "dataMax + 50"]}
+              tickFormatter={(value) => `${value}`}
             />
             <ChartTooltip
               content={

@@ -26,7 +26,6 @@ export function InfoSeparator() {
                         <Separator orientation='vertical' />
                         <p className='text-green-600'>Open</p>
                     </div>
-                    <Separator orientation='vertical' />
                     <ModeToggle />
                 </div>
             </div>
