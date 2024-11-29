@@ -3,6 +3,7 @@ import { InfoSeparator } from '../info/infoSeparator';
 import { RadialDonut } from '../donut/radialDonut';
 import { IndividualFloorBarChart } from '../bar/IndividualFloorBarChart';
 import { ForecastingLineChart } from '../forecastingLineChart/forecastingLineChart';
+import { InfoAccordion } from '../accordian/infoAccordian';
 
 interface TabSwitchProps {
     date: Date;
@@ -38,6 +39,7 @@ export const TabSwitch = (props: TabSwitchProps) => {
             </TabsContent>
             <TabsContent value='detailedView'>
                 <ForecastingLineChart/>
+                <InfoAccordion/>
             </TabsContent>
         </Tabs>
     );
