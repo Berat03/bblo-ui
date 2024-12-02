@@ -1,15 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { InfoSeparator } from '../info/infoSeparator';
-import { RadialDonut } from '../currentDisplay/donut/radialDonut';
-import { IndividualFloorBarChart } from '../currentDisplay/bar/IndividualFloorBarChart';
 import { ForecastingLineChart } from '../forecastingLineChart/forecastingLineChart';
 import { InfoAccordion } from '../accordian/infoAccordian';
 import CurrentDisplay from '../currentDisplay/currentDisplay';
 
-interface TabSwitchProps {
-    date: Date;
-}
-export const TabSwitch = (props: TabSwitchProps) => {
+export const TabSwitch = () => {
     return (
         <Tabs
             defaultValue='landingPageView'

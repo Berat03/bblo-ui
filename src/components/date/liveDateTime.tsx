@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-export const FormattedLiveDateTime = () => {
-    const [date,] = useState(new Date());
+export const LiveDateTime = () => {
+    const [date] = useState(new Date());
     const formattedDate = date.toLocaleDateString('en-GB', {
         weekday: 'short', // 'Tue'
         day: 'numeric' // '17'

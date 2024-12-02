@@ -1,7 +1,7 @@
 'use client';
 
 import { ChartConfig } from '@/components/ui/chart';
-import { RenderRadialDonut } from './renderRadialDonut';
+import { RenderRadialDonut } from './radialDonutCanvasCard';
 
 const chartConfig = {
     visitors: {

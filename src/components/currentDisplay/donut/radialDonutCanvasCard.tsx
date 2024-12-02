@@ -16,7 +16,7 @@ import {
     CardTitle
 } from '@/components/ui/card';
 import { ChartContainer } from '@/components/ui/chart';
-import { FormattedLiveDateTime } from '../../date/formattedLiveDateTime';
+import { LiveDateTime } from '../../date/liveDateTime';
 interface RenderRadialDonutProps {
     barAngle: number;
     chartConfig: any;
@@ -33,7 +33,7 @@ export const RenderRadialDonut = (props: RenderRadialDonutProps) => {
             <CardHeader className='items-center pb-0 mb-0'>
                 <CardTitle>Current Occupancy</CardTitle>
                 <CardDescription>
-                    <FormattedLiveDateTime />
+                    <LiveDateTime />
                 </CardDescription>
             </CardHeader>
             <CardContent className='flex-1 pb-0 '>
