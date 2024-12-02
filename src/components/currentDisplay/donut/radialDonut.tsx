@@ -13,7 +13,7 @@ const chartConfig = {
     }
 } satisfies ChartConfig;
 interface RadialDonutProps {
-    currentOccupancyData: any
+    currentOccupancyData: any;
 }
 export function RadialDonut(props: RadialDonutProps) {
     const chartData = [
@@ -28,9 +28,11 @@ export function RadialDonut(props: RadialDonutProps) {
     const percentageCapacityFull = chartData[0].visitors / maximumCapacity;
     const barAngle = percentageCapacityFull * 360;
 
-    return (         <RenderRadialDonut
-        barAngle={barAngle}
-        chartData={chartData}
-        chartConfig={chartConfig}
-    />);
+    return (
+        <RenderRadialDonut
+            barAngle={barAngle}
+            chartData={chartData}
+            chartConfig={chartConfig}
+        />
+    );
 }

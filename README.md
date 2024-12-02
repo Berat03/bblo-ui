@@ -1,5 +1,7 @@
-# About the project  
+# About the project
+
 # Get started:
+
 JIRA: https://beratbulbul.atlassian.net/jira/software/projects/BBLO/boards/2
 
 AWS Hosted Link: http://bblopublicbucket.s3-website.eu-west-2.amazonaws.com/

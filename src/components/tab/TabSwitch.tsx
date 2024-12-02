@@ -23,7 +23,7 @@ export const TabSwitch = () => {
             >
                 <div className='pt-2'>
                     <div className='flex flex-col sm:flex-row justify-between'>
-                    <CurrentDisplay/>
+                        <CurrentDisplay />
                     </div>
                     <div className='pt-4'></div>
                     <InfoSeparator />

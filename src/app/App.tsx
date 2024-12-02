@@ -6,7 +6,7 @@ function App() {
         <>
             <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
                 <div className='flex flex-row items-start p-2'>
-                    <TabSwitch/>
+                    <TabSwitch />
                 </div>
             </ThemeProvider>
         </>

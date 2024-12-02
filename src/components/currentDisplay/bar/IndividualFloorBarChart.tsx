@@ -19,10 +19,12 @@ import {
     ChartTooltipContent
 } from '@/components/ui/chart';
 interface IndividualFloorBarChartProps {
-    currentOccupancyData: any
+    currentOccupancyData: any;
 }
 
-export function IndividualFloorBarChart({currentOccupancyData}: IndividualFloorBarChartProps ) {
+export function IndividualFloorBarChart({
+    currentOccupancyData
+}: IndividualFloorBarChartProps) {
     const chartConfig = {
         Occupied: {
             label: 'Occupied',
@@ -34,7 +36,6 @@ export function IndividualFloorBarChart({currentOccupancyData}: IndividualFloorB
         }
     } satisfies ChartConfig;
 
-    
     const chartData = [
         {
             floorLevel: 'L1',

@@ -31,11 +31,11 @@ export default function CurrentDisplay() {
     const { data, error } = useSWR<OccupancyData>(
         'https://apps.dur.ac.uk/study-spaces/library/bill-bryson/occupancy/display?json&affluence',
         fetcher,
-        { 
-            refreshInterval: 1000, 
+        {
+            refreshInterval: 1000,
             dedupingInterval: 0,
             revalidateOnFocus: false,
-            revalidateOnReconnect: false 
+            revalidateOnReconnect: false
         }
     );
     if (error) {

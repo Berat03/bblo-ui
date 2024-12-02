@@ -1,7 +1,7 @@
 // give total, and indiv lev context
 
-import { OccupancyData } from "@/api/getCurrentOccupancy";
-import { createContext } from "react";
+import { OccupancyData } from '@/api/getCurrentOccupancy';
+import { createContext } from 'react';
 
 const OccupancyContext = createContext<OccupancyData>({
     Level1: 100,
