@@ -1,6 +1,7 @@
 import useSWR from 'swr';
 import { RadialDonut } from './donut/radialDonut';
 import { IndividualFloorBarChart } from './bar/IndividualFloorBarChart';
+import { useEffect } from 'react';
 
 export interface OccupancyData {
     Level1: number;
@@ -30,9 +31,13 @@ export default function CurrentDisplay() {
     const { data, error } = useSWR<OccupancyData>(
         'https://apps.dur.ac.uk/study-spaces/library/bill-bryson/occupancy/display?json&affluence',
         fetcher,
-        { refreshInterval: 1000 }
+        { 
+            refreshInterval: 1000, 
+            dedupingInterval: 0,
+            revalidateOnFocus: false,
+            revalidateOnReconnect: false 
+        }
     );
-
     if (error) {
         console.error('Error fetching occupancy data:', error);
     }
@@ -46,6 +51,9 @@ export default function CurrentDisplay() {
         Level4nsw: 0,
         total: 0
     };
+    useEffect(() => {
+        console.log('123123');
+    }, [data]);
 
     return (
         <>
