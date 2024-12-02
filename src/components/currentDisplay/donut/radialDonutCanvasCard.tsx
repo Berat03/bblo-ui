@@ -16,7 +16,7 @@ import {
     CardTitle
 } from '@/components/ui/card';
 import { ChartContainer } from '@/components/ui/chart';
-import { LiveDateTime } from '../../date/liveDateTime';
+import { LiveDateTime } from '../date/liveDateTime';
 interface RenderRadialDonutProps {
     barAngle: number;
     chartConfig: any;
