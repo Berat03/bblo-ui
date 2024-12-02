@@ -18,55 +18,55 @@ import {
     ChartTooltip,
     ChartTooltipContent
 } from '@/components/ui/chart';
-import { useContext } from 'react';
-import OccupancyContext from '../context/occupancyContext';
+interface IndividualFloorBarChartProps {
+    currentOccupancyData: any
+}
 
-const chartConfig = {
-    Occupied: {
-        label: 'Occupied',
-        color: 'hsl(var(--chart-1))'
-    },
-    Empty: {
-        label: 'Empty Spaces',
-        color: 'hsl(var(--chart-2))'
-    }
-} satisfies ChartConfig;
+export function IndividualFloorBarChart({currentOccupancyData}: IndividualFloorBarChartProps ) {
+    const chartConfig = {
+        Occupied: {
+            label: 'Occupied',
+            color: 'hsl(var(--chart-1))'
+        },
+        Empty: {
+            label: 'Empty Spaces',
+            color: 'hsl(var(--chart-2))'
+        }
+    } satisfies ChartConfig;
 
-export function IndividualFloorBarChart() {
-    const occupancyData = useContext(OccupancyContext);
+    
     const chartData = [
         {
             floorLevel: 'L1',
-            Occupied: occupancyData.Level1,
-            Empty: 386 - occupancyData.Level1
+            Occupied: currentOccupancyData.Level1,
+            Empty: 386 - currentOccupancyData.Level1
         },
         {
             floorLevel: 'L2',
-            Occupied: occupancyData.Level2e,
-            Empty: 172 - occupancyData.Level2e
+            Occupied: currentOccupancyData.Level2e,
+            Empty: 172 - currentOccupancyData.Level2e
         },
         {
             floorLevel: 'L3',
-            Occupied: occupancyData.Level3nsw,
-            Empty: 426 - occupancyData.Level3nsw
+            Occupied: currentOccupancyData.Level3nsw,
+            Empty: 426 - currentOccupancyData.Level3nsw
         },
         {
             floorLevel: 'L3E',
-            Occupied: occupancyData.Level3e,
-            Empty: 143 - occupancyData.Level3e
+            Occupied: currentOccupancyData.Level3e,
+            Empty: 143 - currentOccupancyData.Level3e
         },
         {
             floorLevel: 'L4',
-            Occupied: occupancyData.Level4nsw,
-            Empty: 356 - occupancyData.Level4nsw
+            Occupied: currentOccupancyData.Level4nsw,
+            Empty: 356 - currentOccupancyData.Level4nsw
         },
         {
             floorLevel: 'L4E',
-            Occupied: occupancyData.Level4e,
-            Empty: 152 - occupancyData.Level4e
+            Occupied: currentOccupancyData.Level4e,
+            Empty: 152 - currentOccupancyData.Level4e
         }
     ];
-    console.log(occupancyData);
     return (
         <Card>
             <CardHeader>

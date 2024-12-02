@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import useSWR from 'swr'
+
 export interface OccupancyData {
     Level1: number;
     Level2e: number;
@@ -29,4 +31,5 @@ export const getCurrentOccupancy = async (): Promise<OccupancyData> => {
 
     return result;
 };
+
 
