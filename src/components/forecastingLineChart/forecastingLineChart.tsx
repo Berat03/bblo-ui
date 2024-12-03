@@ -124,10 +124,9 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const intervals = [
-    { label: '6 Hours', value: 1 },
-    { label: '24 Hours', value: 2 },
-    { label: '3 Days', value: 3 },
-    { label: 'Week', value: 4 }
+    { label: 'Today', value: 1 },
+    { label: 'Tomorrow', value: 2 },
+    { label: 'Week', value: 3 },
 ];
 
 export function ForecastingLineChart() {
@@ -147,12 +146,12 @@ export function ForecastingLineChart() {
     );
 
     return (
-        <Card>
+        <Card className=''>
             <CardHeader className='flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row'>
                 <div className='flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6'>
                     <CardTitle>Future Occupancy</CardTitle>
                     <CardDescription>
-                        Showing predicted visitors for the next{' '}
+                        Forecasted visitors for {' '}
                         <select
                             value={selectedInterval}
                             onChange={(e) =>
