@@ -22,6 +22,16 @@ interface IndividualFloorBarChartProps {
     currentOccupancyData: any;
 }
 
+// Dictionary to store maximum values for each floor
+const MAX_SPACES = {
+    Level1: 386,
+    Level2e: 172,
+    Level3nsw: 426,
+    Level3e: 143,
+    Level4nsw: 356,
+    Level4e: 152
+};
+
 export function IndividualFloorBarChart({
     currentOccupancyData
 }: IndividualFloorBarChartProps) {
@@ -36,38 +46,23 @@ export function IndividualFloorBarChart({
         }
     } satisfies ChartConfig;
 
-    const chartData = [
-        {
-            floorLevel: 'L1',
-            Occupied: currentOccupancyData.Level1,
-            Empty: 386 - currentOccupancyData.Level1
-        },
-        {
-            floorLevel: 'L2',
-            Occupied: currentOccupancyData.Level2e,
-            Empty: 172 - currentOccupancyData.Level2e
-        },
-        {
-            floorLevel: 'L3',
-            Occupied: currentOccupancyData.Level3nsw,
-            Empty: 426 - currentOccupancyData.Level3nsw
-        },
-        {
-            floorLevel: 'L3E',
-            Occupied: currentOccupancyData.Level3e,
-            Empty: 143 - currentOccupancyData.Level3e
-        },
-        {
-            floorLevel: 'L4',
-            Occupied: currentOccupancyData.Level4nsw,
-            Empty: 356 - currentOccupancyData.Level4nsw
-        },
-        {
-            floorLevel: 'L4E',
-            Occupied: currentOccupancyData.Level4e,
-            Empty: 152 - currentOccupancyData.Level4e
-        }
-    ];
+    // Generate chart data dynamically using MAX_SPACES
+    const chartData = Object.entries(MAX_SPACES).map(([key, maxSpaces]) => {
+        const Empty = currentOccupancyData[key] || 0;
+        const floorLevel = key
+            .replace('Level1', 'L1')
+            .replace('Level2e', 'L2')
+            .replace('Level3nsw', 'L3')
+            .replace('Level3e', 'L3E')
+            .replace('Level4nsw', 'L4')
+            .replace('Level4e', 'L4E');
+        return {
+            floorLevel,
+            Occupied: maxSpaces - Empty,
+            Empty: Empty
+        };
+    });
+
     return (
         <Card>
             <CardHeader>
@@ -85,7 +80,6 @@ export function IndividualFloorBarChart({
                             tickLine={false}
                             tickMargin={10}
                             axisLine={false}
-                            tickFormatter={(value) => value.slice(0, 3)}
                         />
                         <ChartTooltip
                             content={<ChartTooltipContent hideLabel />}
