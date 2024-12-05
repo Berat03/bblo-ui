@@ -123,16 +123,9 @@ const chartConfig = {
     }
 } satisfies ChartConfig;
 
-const intervals = [
-    { label: 'Today', value: 1 },
-    { label: 'Tomorrow', value: 2 },
-    { label: 'Week', value: 3 },
-];
-
 export function ForecastingLineChart() {
     const [activeChart, setActiveChart] =
         React.useState<keyof typeof chartConfig>('total');
-    const [selectedInterval, setSelectedInterval] = React.useState<number>(3);
 
     const total = React.useMemo(
         () => ({
@@ -151,23 +144,8 @@ export function ForecastingLineChart() {
                 <div className='flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6'>
                     <CardTitle>Future Occupancy</CardTitle>
                     <CardDescription>
-                        Forecasted visitors for {' '}
-                        <select
-                            value={selectedInterval}
-                            onChange={(e) =>
-                                setSelectedInterval(Number(e.target.value))
-                            }
-                            className='inline-block bg-transparent border-none text-primary focus:outline-none'
-                        >
-                            {intervals.map((interval) => (
-                                <option
-                                    key={interval.value}
-                                    value={interval.value}
-                                >
-                                    {interval.label}
-                                </option>
-                            ))}
-                        </select>
+                        Predicted future occupancy
+
                     </CardDescription>
                 </div>
                 <div className='flex flex-col sm:flex-row'>

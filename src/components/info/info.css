@@ -1,0 +1,17 @@
+.linkButton {
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+.linkButton:hover {
+    background-color:rgb(211, 211, 211, 0.2);
+}
+
+.statusIcon {
+    color: green;
+    padding: 4px 8px;
+}
+
+.statusIcon :hover {
+    color: red;
+    padding: 4px 8px;
+}
