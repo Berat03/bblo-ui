@@ -24,12 +24,12 @@ interface IndividualFloorBarChartProps {
 
 // Dictionary to store maximum values for each floor
 const MAX_SPACES = {
-    Level1: 386,
-    Level2e: 172,
-    Level3nsw: 426,
-    Level3e: 143,
-    Level4nsw: 356,
-    Level4e: 152
+    Level1: 388, //388
+    Level2e: 192, //172
+    Level3nsw: 435, //326
+    Level3e: 155, // 143
+    Level4nsw: 375, // 370
+    Level4e: 203 //152
 };
 
 export function IndividualFloorBarChart({
@@ -41,7 +41,7 @@ export function IndividualFloorBarChart({
             color: 'hsl(var(--chart-1))'
         },
         Empty: {
-            label: 'Empty Spaces',
+            label: 'Free Spaces',
             color: 'hsl(var(--chart-2))'
         }
     } satisfies ChartConfig;
@@ -68,7 +68,7 @@ export function IndividualFloorBarChart({
             <CardHeader>
                 <CardTitle>How busy is each level?</CardTitle>
                 <CardDescription>
-                    Counting free and occupied seats
+                    Counting free spaces by level
                 </CardDescription>
             </CardHeader>
             <CardContent>

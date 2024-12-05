@@ -15,7 +15,7 @@ const chartConfig = {
 interface RadialDonutProps {
     currentOccupancyData: any;
 }
-export function RadialDonut(props: RadialDonutProps) {
+export function RadialDonut(props: RadialDonutProps) { // maybe this should be merged with the card component
     const chartData = [
         {
             browser: 'Visitors',

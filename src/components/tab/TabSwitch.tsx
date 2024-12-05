@@ -19,19 +19,25 @@ export const TabSwitch = () => {
             {/** --------------------------------------------------------------------------- */}
             <TabsContent
                 value='landingPageView'
-                className='flex flex-col items-center'
+                className='flex flex-col items-center w-full overflow-x-hidden'
             >
-                <div className='pt-2'>
-                    <div className='flex flex-col sm:flex-row justify-between'>
+                <div className='pt-2 w-full max-w-4xl px-4'>
+                    <div className='flex flex-col sm:flex-row justify-between w-full'>
                         <CurrentDisplay />
                     </div>
                     <div className='pt-4'></div>
                     <InfoSeparator />
                 </div>
             </TabsContent>
-            <TabsContent value='detailedView'>
+
+            <TabsContent
+                value='detailedView'
+                className='w-screen flex flex-col items-center'
+            >
                 <ForecastingLineChart />
-                <InfoAccordion />
+                <div className='mt-2 w-full sm:w-auto'>
+                    <InfoAccordion />
+                </div>
             </TabsContent>
         </Tabs>
     );

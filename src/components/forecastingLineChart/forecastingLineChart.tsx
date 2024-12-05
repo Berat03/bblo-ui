@@ -18,172 +18,94 @@ import {
 } from '@/components/ui/chart';
 
 const chartData = [
-    {
-        date: '2024-04-01',
-        total: 452,
-        level1: 222,
-        level2: 150,
-        level3: 50,
-        level4: 30
-    },
-    {
-        date: '2024-04-02',
-        total: 342,
-        level1: 97,
-        level2: 180,
-        level3: 40,
-        level4: 25
-    },
-    {
-        date: '2024-04-03',
-        total: 367,
-        level1: 167,
-        level2: 120,
-        level3: 60,
-        level4: 20
-    },
-    {
-        date: '2024-04-04',
-        total: 617,
-        level1: 242,
-        level2: 260,
-        level3: 80,
-        level4: 35
-    },
-    {
-        date: '2024-04-05',
-        total: 813,
-        level1: 373,
-        level2: 290,
-        level3: 100,
-        level4: 50
-    },
-    {
-        date: '2024-04-06',
-        total: 801,
-        level1: 301,
-        level2: 340,
-        level3: 120,
-        level4: 40
-    },
-    {
-        date: '2024-04-07',
-        total: 560,
-        level1: 245,
-        level2: 180,
-        level3: 90,
-        level4: 45
-    },
-    {
-        date: '2024-04-08',
-        total: 894,
-        level1: 409,
-        level2: 320,
-        level3: 110,
-        level4: 55
-    },
-    {
-        date: '2024-04-09',
-        total: 219,
-        level1: 59,
-        level2: 110,
-        level3: 30,
-        level4: 20
-    },
-    {
-        date: '2024-04-10',
-        total: 556,
-        level1: 261,
-        level2: 190,
-        level3: 70,
-        level4: 35
-    }
+    { date: '2024-04-01', total: 100, level1: 222, level2: 150 },
+    { date: '2024-04-02', total: 342, level1: 97, level2: 180 },
+    { date: '2024-04-03', total: 367, level1: 167, level2: 120 },
+    { date: '2024-04-04', total: 617, level1: 242, level2: 260 },
+    { date: '2024-04-05', total: 813, level1: 373, level2: 290 },
+    { date: '2024-04-06', total: 801, level1: 301, level2: 340 },
+    { date: '2024-04-07', total: 560, level1: 245, level2: 180 },
+    { date: '2024-04-08', total: 894, level1: 409, level2: 320 },
 ];
+/**
+ * Include in the title name, the maximum for that day
+ * 
+ * for today, include the prev 3 hrs
+ * for tomorrow, 
+ * include 00:00-24:00
+ * for this week
+ * include peak hourly by day
+ * 
+ * hence axis will change.
+ * 
+ * 
+ * 
+ * 
+ */
 
 const chartConfig = {
     total: {
-        label: 'Total',
+        label: 'Today',
         color: 'hsl(var(--chart-1))'
     },
     level1: {
-        label: 'Level 1',
+        label: 'Tomorrow',
         color: 'hsl(var(--chart-2))'
     },
     level2: {
-        label: 'Level 2',
+        label: 'This Week',
         color: 'hsl(var(--chart-3))'
-    },
-    level3: {
-        label: 'Level 3',
-        color: 'hsl(var(--chart-4))'
-    },
-    level4: {
-        label: 'Level 4',
-        color: 'hsl(var(--chart-5))'
     }
 } satisfies ChartConfig;
 
 export function ForecastingLineChart() {
     const [activeChart, setActiveChart] =
         React.useState<keyof typeof chartConfig>('total');
-
     const total = React.useMemo(
         () => ({
             total: chartData.reduce((acc, curr) => acc + curr.total, 0),
             level1: chartData.reduce((acc, curr) => acc + curr.level1, 0),
             level2: chartData.reduce((acc, curr) => acc + curr.level2, 0),
-            level3: chartData.reduce((acc, curr) => acc + curr.level3, 0),
-            level4: chartData.reduce((acc, curr) => acc + curr.level4, 0)
         }),
         []
     );
 
     return (
-        <Card className=''>
+        <div className="w-full max-w-[1000px] px-3">
+        <Card>
             <CardHeader className='flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row'>
-                <div className='flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6'>
+                <div className='flex flex-1 flex-col justify-center gap-1 px-6 py-3 sm:py-5 '>
                     <CardTitle>Future Occupancy</CardTitle>
-                    <CardDescription>
-                        Predicted future occupancy
-
+                    <CardDescription className='hidden sm:block'>
+                        Showing predicted future occupancy
                     </CardDescription>
                 </div>
-                <div className='flex flex-col sm:flex-row'>
-                    <button
-                        data-active={activeChart === 'total'}
-                        className='flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6'
-                        onClick={() => setActiveChart('total')}
-                    >
-                        <span className='text-xs text-muted-foreground'>
-                            {chartConfig['total'].label}
-                        </span>
-                        <span className='text-lg font-bold leading-none sm:text-3xl'>
-                            {total['total'].toLocaleString()}
-                        </span>
-                    </button>
-                    <div className='hidden md:flex'>
-                        {['level1', 'level2', 'level3', 'level4'].map((key) => {
+                <div className='flex'>
+                    {['total', 'level1', 'level2'].map(
+                        (key) => {
                             const chart = key as keyof typeof chartConfig;
                             return (
                                 <button
                                     key={chart}
                                     data-active={activeChart === chart}
-                                    className='flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6'
+                                    className='flex flex-1 flex-col justify-center gap-1 border-t px-4 py-2 even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-3'
                                     onClick={() => setActiveChart(chart)}
                                 >
                                     <span className='text-xs text-muted-foreground'>
                                         {chartConfig[chart].label}
                                     </span>
                                     <span className='text-lg font-bold leading-none sm:text-3xl'>
-                                        {total[chart].toLocaleString()}
+                                        {total[
+                                            key as keyof typeof total
+                                        ].toLocaleString()}
                                     </span>
                                 </button>
                             );
-                        })}
-                    </div>
+                        }
+                    )}
                 </div>
             </CardHeader>
-            <CardContent className='px-2 sm:p-6'>
+            <CardContent className='py-3'>
                 <ChartContainer
                     config={chartConfig}
                     className='aspect-auto h-[250px] w-full'
@@ -192,9 +114,10 @@ export function ForecastingLineChart() {
                         accessibilityLayer
                         data={chartData}
                         margin={{
-                            left: 12,
-                            right: 12
+                            left: -20,
+                            right: 1
                         }}
+                        className=''
                     >
                         <CartesianGrid vertical={false} />
                         <XAxis
@@ -215,8 +138,8 @@ export function ForecastingLineChart() {
                             tickLine={false}
                             axisLine={false}
                             tickMargin={8}
-                            domain={[0, 'dataMax + 50']}
-                            tickFormatter={(value) => `${value}`}
+                            domain={[0, 'dataMax']} // Adjust the domain to add padding
+                            tickFormatter={(value) => `${value}`} // Customize format if needed
                         />
                         <ChartTooltip
                             content={
@@ -246,5 +169,6 @@ export function ForecastingLineChart() {
                 </ChartContainer>
             </CardContent>
         </Card>
+        </div>
     );
 }

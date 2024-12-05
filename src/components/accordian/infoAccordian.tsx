@@ -7,10 +7,11 @@ import {
 
 export function InfoAccordion() {
     return (
-        <Accordion type='single' collapsible className='w-full'>
+        <div className='w-screen max-w-[1000px] px-3'>
+        <Accordion type='single' collapsible >
             <AccordionItem value='item-1'>
                 <AccordionTrigger>
-                    How does our forecasting model work?
+                    How does our model work?
                 </AccordionTrigger>
                 <AccordionContent>Not too sure myself.</AccordionContent>
             </AccordionItem>
@@ -31,5 +32,7 @@ export function InfoAccordion() {
                 </AccordionContent>
             </AccordionItem>
         </Accordion>
+        </div>
     );
+
 }
