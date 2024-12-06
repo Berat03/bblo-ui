@@ -19,12 +19,10 @@ export const TabSwitch = () => {
             {/** --------------------------------------------------------------------------- */}
             <TabsContent
                 value='landingPageView'
-                className='flex flex-col items-center w-full overflow-x-hidden'
+                className='flex flex-col items-center'
             >
                 <div className='pt-2 w-full max-w-4xl px-4'>
-                    <div className='flex flex-col sm:flex-row justify-between w-full'>
-                        <CurrentDisplay />
-                    </div>
+                    <CurrentDisplay />
                     <div className='pt-4'></div>
                     <InfoSeparator />
                 </div>
@@ -35,9 +33,7 @@ export const TabSwitch = () => {
                 className='w-screen flex flex-col items-center'
             >
                 <ForecastingLineChart />
-                <div className='mt-2 w-full sm:w-auto'>
-                    <InfoAccordion />
-                </div>
+                <InfoAccordion />
             </TabsContent>
         </Tabs>
     );

@@ -1,7 +1,6 @@
 import useSWR from 'swr';
 import { RadialDonut } from './donut/radialDonut';
 import { IndividualFloorBarChart } from './bar/IndividualFloorBarChart';
-import { useEffect } from 'react';
 
 export interface OccupancyData {
     Level1: number;
@@ -51,15 +50,12 @@ export default function CurrentDisplay() {
         Level4nsw: 0,
         total: 0
     };
-    useEffect(() => {
-        console.log('123123');
-    }, [data]);
 
     return (
-        <>
+        <div className='flex flex-col sm:flex-row' >
             <RadialDonut currentOccupancyData={occupancyData} />
             <div className='pr-0 pl-0 sm:pr-2 sm:pl-2 pt-4 sm:pt-0'></div>
             <IndividualFloorBarChart currentOccupancyData={occupancyData} />
-        </>
+        </div>
     );
 }
