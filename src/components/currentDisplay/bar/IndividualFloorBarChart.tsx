@@ -1,5 +1,3 @@
-'use client';
-
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 
 import {
@@ -67,9 +65,7 @@ export function IndividualFloorBarChart({
         <Card>
             <CardHeader>
                 <CardTitle>How busy is each level?</CardTitle>
-                <CardDescription>
-                    Counting free spaces by level
-                </CardDescription>
+                <CardDescription>Counting free spaces by level</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>

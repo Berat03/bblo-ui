@@ -52,7 +52,7 @@ export default function CurrentDisplay() {
     };
 
     return (
-        <div className='flex flex-col sm:flex-row' >
+        <div className='flex flex-col sm:flex-row'>
             <RadialDonut currentOccupancyData={occupancyData} />
             <div className='pr-0 pl-0 sm:pr-2 sm:pl-2 pt-4 sm:pt-0'></div>
             <IndividualFloorBarChart currentOccupancyData={occupancyData} />

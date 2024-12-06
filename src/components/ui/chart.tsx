@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-'use client';
-
 import * as React from 'react';
 import * as RechartsPrimitive from 'recharts';
 
