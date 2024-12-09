@@ -15,32 +15,6 @@ import {
     ChartTooltipContent
 } from '@/components/ui/chart';
 
-const chartData = [
-    { date: '2024-04-01', total: 100, level1: 222, level2: 150 },
-    { date: '2024-04-02', total: 342, level1: 97, level2: 180 },
-    { date: '2024-04-03', total: 367, level1: 167, level2: 120 },
-    { date: '2024-04-04', total: 617, level1: 242, level2: 260 },
-    { date: '2024-04-05', total: 813, level1: 373, level2: 290 },
-    { date: '2024-04-06', total: 801, level1: 301, level2: 340 },
-    { date: '2024-04-07', total: 560, level1: 245, level2: 180 },
-    { date: '2024-04-08', total: 894, level1: 409, level2: 320 }
-];
-/**
- * Include in the title name, the maximum for that day
- *
- * for today, include the prev 3 hrs
- * for tomorrow,
- * include 00:00-24:00
- * for this week
- * include peak hourly by day
- *
- * hence axis will change.
- *
- *
- *
- *
- */
-
 const chartConfig = {
     total: {
         label: 'Today',
@@ -56,17 +30,92 @@ const chartConfig = {
     }
 } satisfies ChartConfig;
 
+// Helper to add suffix to day number (e.g., 1st, 2nd, 3rd, 4th)
+function getDaySuffix(day: number): string {
+    const lastDigit = day % 10;
+    const lastTwoDigits = day % 100;
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 13) return `${day}th`;
+    switch (lastDigit) {
+        case 1:
+            return `${day}st`;
+        case 2:
+            return `${day}nd`;
+        case 3:
+            return `${day}rd`;
+        default:
+            return `${day}th`;
+    }
+}
+
+// Generate mock data for today (24 hours)
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const chartDataToday = Array.from({ length: 24 }, (_, i) => {
+    const hourDate = new Date(today.getTime());
+    hourDate.setHours(i);
+    return {
+        date: hourDate,
+        total: Math.floor(Math.random() * 1000),
+        level1: Math.floor(Math.random() * 500),
+        level2: Math.floor(Math.random() * 300)
+    };
+});
+
+// Generate mock data for tomorrow (24 hours)
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+tomorrow.setHours(0, 0, 0, 0);
+const chartDataTomorrow = Array.from({ length: 24 }, (_, i) => {
+    const hourDate = new Date(tomorrow.getTime());
+    hourDate.setHours(i);
+    return {
+        date: hourDate,
+        total: Math.floor(Math.random() * 1000),
+        level1: Math.floor(Math.random() * 500),
+        level2: Math.floor(Math.random() * 300)
+    };
+});
+
+// Generate mock data for this week (7 days)
+const weekStart = new Date();
+weekStart.setHours(0, 0, 0, 0);
+const chartDataWeek = Array.from({ length: 7 }, (_, i) => {
+    const dayDate = new Date(weekStart.getTime());
+    dayDate.setDate(dayDate.getDate() + i);
+    return {
+        date: dayDate,
+        total: Math.floor(Math.random() * 1000),
+        level1: Math.floor(Math.random() * 500),
+        level2: Math.floor(Math.random() * 300)
+    };
+});
+
 export function ForecastingLineChart() {
-    const [activeChart, setActiveChart] =
-        React.useState<keyof typeof chartConfig>('total');
-    const total = React.useMemo(
-        () => ({
-            total: chartData.reduce((acc, curr) => acc + curr.total, 0),
-            level1: chartData.reduce((acc, curr) => acc + curr.level1, 0),
-            level2: chartData.reduce((acc, curr) => acc + curr.level2, 0)
-        }),
-        []
-    );
+    const [activeChart, setActiveChart] = React.useState<keyof typeof chartConfig>('total');
+
+    // Calculate totals from the weekly dataset just as a placeholder
+    // (You can change this logic if needed.)
+    const total = React.useMemo(() => {
+        return {
+            total: chartDataWeek.reduce((acc, curr) => acc + curr.total, 0),
+            level1: chartDataWeek.reduce((acc, curr) => acc + curr.level1, 0),
+            level2: chartDataWeek.reduce((acc, curr) => acc + curr.level2, 0)
+        };
+    }, []);
+
+    // Decide which data to show based on the active chart
+    const displayedData = React.useMemo(() => {
+        if (activeChart === 'total') {
+            // Today
+            return chartDataToday;
+        } else if (activeChart === 'level1') {
+            // Tomorrow
+            return chartDataTomorrow;
+        } else {
+            // This Week
+            return chartDataWeek;
+        }
+    }, [activeChart]);
 
     return (
         <div className='w-full max-w-[1000px] px-3'>
@@ -75,11 +124,11 @@ export function ForecastingLineChart() {
                     <div className='flex flex-1 flex-col justify-center gap-1 px-6 py-3 sm:py-5 '>
                         <CardTitle>Future Occupancy</CardTitle>
                         <CardDescription className='hidden sm:block'>
-                            Showing predicted future occupancy
+                            Forecasting future peak occupancy.
                         </CardDescription>
                     </div>
                     <div className='flex'>
-                        {['total', 'level1', 'level2'].map((key) => {
+                        {(['total', 'level1', 'level2'] as const).map((key) => {
                             const chart = key as keyof typeof chartConfig;
                             return (
                                 <button
@@ -92,9 +141,7 @@ export function ForecastingLineChart() {
                                         {chartConfig[chart].label}
                                     </span>
                                     <span className='text-lg font-bold leading-none sm:text-3xl'>
-                                        {total[
-                                            key as keyof typeof total
-                                        ].toLocaleString()}
+                                        {total[key].toLocaleString()}
                                     </span>
                                 </button>
                             );
@@ -108,12 +155,11 @@ export function ForecastingLineChart() {
                     >
                         <LineChart
                             accessibilityLayer
-                            data={chartData}
+                            data={displayedData}
                             margin={{
                                 left: -20,
                                 right: 1
                             }}
-                            className=''
                         >
                             <CartesianGrid vertical={false} />
                             <XAxis
@@ -124,18 +170,27 @@ export function ForecastingLineChart() {
                                 minTickGap={32}
                                 tickFormatter={(value) => {
                                     const date = new Date(value);
-                                    return date.toLocaleDateString('en-US', {
-                                        month: 'short',
-                                        day: 'numeric'
-                                    });
+                                    if (activeChart === 'total' || activeChart === 'level1') {
+                                        // For hours: show "1:00", "2:00", etc.
+                                        return date.toLocaleTimeString('en-US', {
+                                            hour: 'numeric',
+                                            minute: '2-digit',
+                                            hour12: false
+                                        });
+                                    } else {
+                                        // Show "Mon 9th", "Tue 10th", etc.
+                                        const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'short' });
+                                        const dayOfMonth = getDaySuffix(date.getDate());
+                                        return `${dayOfWeek} ${dayOfMonth}`;
+                                    }
                                 }}
                             />
                             <YAxis
                                 tickLine={false}
                                 axisLine={false}
                                 tickMargin={8}
-                                domain={[0, 'dataMax']} // Adjust the domain to add padding
-                                tickFormatter={(value) => `${value}`} // Customize format if needed
+                                domain={[0, 'dataMax']}
+                                tickFormatter={(value) => `${value}`}
                             />
                             <ChartTooltip
                                 content={
@@ -143,13 +198,23 @@ export function ForecastingLineChart() {
                                         className='w-[150px]'
                                         nameKey='views'
                                         labelFormatter={(value) => {
-                                            return new Date(
-                                                value
-                                            ).toLocaleDateString('en-US', {
-                                                month: 'short',
-                                                day: 'numeric',
-                                                year: 'numeric'
-                                            });
+                                            const date = new Date(value);
+                                            if (activeChart === 'total' || activeChart === 'level1') {
+                                                // Include day and month for the tooltip
+                                                return date.toLocaleTimeString('en-US', {
+                                                    hour: 'numeric',
+                                                    minute: '2-digit',
+                                                    hour12: false,
+                                                    month: 'short',
+                                                    day: 'numeric',
+                                                    year: 'numeric'
+                                                });
+                                            } else {
+                                                // Include weekday and suffix
+                                                const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'short' });
+                                                const dayOfMonth = getDaySuffix(date.getDate());
+                                                return `${dayOfWeek} ${dayOfMonth}, ${date.getFullYear()}`;
+                                            }
                                         }}
                                     />
                                 }
