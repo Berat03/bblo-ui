@@ -30,9 +30,9 @@ interface RenderRadialDonutProps {
 
 export const RenderRadialDonut = (props: RenderRadialDonutProps) => {
     return (
-        <Card className='flex flex-col'>
-            <CardHeader className='items-center pb-0 mb-0'>
-                <CardTitle>Current Occupancy</CardTitle>
+        <Card className='flex flex-col h-[380px]'>
+            <CardHeader className='items-center pb-0 mb-0 whitespace-nowrap'>
+                <CardTitle> Bill Bryson Occupancy</CardTitle>
                 <CardDescription>
                     <LiveDateTime />
                 </CardDescription>
@@ -99,11 +99,11 @@ export const RenderRadialDonut = (props: RenderRadialDonutProps) => {
                 </ChartContainer>
             </CardContent>
             <CardFooter className='flex-col gap-2 text-sm'>
-                <div className='flex items-center gap-2 font-medium leading-none'>
+                <div className='flex items-center gap-2 font-medium leading-none whitespace-nowrap'>
                     Trending up by 16% this month
                     <TrendingUp className='h-4 w-4' />
                 </div>
-                <div className='leading-none text-muted-foreground'>
+                <div className='leading-none text-muted-foreground whitespace-nowrap'>
                     Displaying total available free spaces
                 </div>
             </CardFooter>

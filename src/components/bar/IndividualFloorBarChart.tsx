@@ -62,7 +62,7 @@ export function IndividualFloorBarChart({
     });
 
     return (
-        <Card>
+        <Card className='h-[380px]'>
             <CardHeader>
                 <CardTitle>How busy is each level?</CardTitle>
                 <CardDescription>Counting free spaces by level</CardDescription>
@@ -97,10 +97,10 @@ export function IndividualFloorBarChart({
                 </ChartContainer>
             </CardContent>
             <CardFooter className='flex-col items-start gap-2 text-sm'>
-                <div className='flex gap-2 font-medium leading-none'>
+                <div className='flex gap-2 font-medium leading-none whitespace-nowrap'>
                     Level 3 East Wing is the quietest area.
                 </div>
-                <div className='leading-none text-muted-foreground'>
+                <div className='leading-none text-muted-foreground whitespace-nowrap'>
                     Showing free spaces by section
                 </div>
             </CardFooter>

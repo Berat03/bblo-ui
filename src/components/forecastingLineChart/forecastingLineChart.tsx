@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from 'recharts';
+import {
+    Area,
+    AreaChart,
+    CartesianGrid,
+    Line,
+    LineChart,
+    XAxis,
+    YAxis
+} from 'recharts';
 
 import {
     Card,
@@ -16,144 +24,222 @@ import {
 } from '@/components/ui/chart';
 
 const chartConfig = {
-    total: {
+    today: {
         label: 'Today',
         color: 'hsl(var(--chart-1))'
     },
-    level1: {
+    tomorrow: {
         label: 'Tomorrow',
         color: 'hsl(var(--chart-2))'
-    },
-    level2: {
-        label: 'This Week',
-        color: 'hsl(var(--chart-3))'
     }
 } satisfies ChartConfig;
 
-// Helper to add suffix to day number (e.g., 1st, 2nd, 3rd, 4th)
-function getDaySuffix(day: number): string {
-    const lastDigit = day % 10;
-    const lastTwoDigits = day % 100;
-    if (lastTwoDigits >= 11 && lastTwoDigits <= 13) return `${day}th`;
-    switch (lastDigit) {
-        case 1:
-            return `${day}st`;
-        case 2:
-            return `${day}nd`;
-        case 3:
-            return `${day}rd`;
-        default:
-            return `${day}th`;
+const currentDate = new Date();
+const chartDataToday = [
+    { date: new Date(currentDate.setHours(0, 0, 0, 0)), today: 1200 },
+    { date: new Date(currentDate.setHours(1, 0, 0, 0)), today: 1300 },
+    { date: new Date(currentDate.setHours(2, 0, 0, 0)), today: 1400 },
+    { date: new Date(currentDate.setHours(3, 0, 0, 0)), today: 250 },
+    { date: new Date(currentDate.setHours(4, 0, 0, 0)), today: 250 },
+    { date: new Date(currentDate.setHours(5, 0, 0, 0)), today: 500 },
+    { date: new Date(currentDate.setHours(6, 0, 0, 0)), today: 100 },
+    { date: new Date(currentDate.setHours(7, 0, 0, 0)), today: 1750 },
+    { date: new Date(currentDate.setHours(8, 0, 0, 0)), today: 1600 },
+    { date: new Date(currentDate.setHours(9, 0, 0, 0)), today: 1500 },
+    { date: new Date(currentDate.setHours(10, 0, 0, 0)), today: 1400 },
+    { date: new Date(currentDate.setHours(11, 0, 0, 0)), today: 1300 },
+    { date: new Date(currentDate.setHours(12, 0, 0, 0)), today: 1250 },
+    { date: new Date(currentDate.setHours(13, 0, 0, 0)), today: 1350 },
+    { date: new Date(currentDate.setHours(14, 0, 0, 0)), today: 1450 },
+    { date: new Date(currentDate.setHours(15, 0, 0, 0)), today: 1550 },
+    { date: new Date(currentDate.setHours(16, 0, 0, 0)), today: 1650 },
+    { date: new Date(currentDate.setHours(17, 0, 0, 0)), today: 1750 },
+    { date: new Date(currentDate.setHours(18, 0, 0, 0)), today: 1800 },
+    { date: new Date(currentDate.setHours(19, 0, 0, 0)), today: 1700 },
+    { date: new Date(currentDate.setHours(20, 0, 0, 0)), today: 1600 },
+    { date: new Date(currentDate.setHours(21, 0, 0, 0)), today: 1500 },
+    { date: new Date(currentDate.setHours(22, 0, 0, 0)), today: 1400 },
+    { date: new Date(currentDate.setHours(23, 0, 0, 0)), today: 1300 }
+];
+
+const chartDataTomorrow = [
+    {
+        date: new Date(currentDate.setHours(0, 0, 0, 0)),
+        today: 1100,
+        tomorrow: 700
+    },
+    {
+        date: new Date(currentDate.setHours(1, 0, 0, 0)),
+        today: 1150,
+        tomorrow: 750
+    },
+    {
+        date: new Date(currentDate.setHours(2, 0, 0, 0)),
+        today: 1200,
+        tomorrow: 800
+    },
+    {
+        date: new Date(currentDate.setHours(3, 0, 0, 0)),
+        today: 1250,
+        tomorrow: 850
+    },
+    {
+        date: new Date(currentDate.setHours(4, 0, 0, 0)),
+        today: 1300,
+        tomorrow: 900
+    },
+    {
+        date: new Date(currentDate.setHours(5, 0, 0, 0)),
+        today: 1350,
+        tomorrow: 950
+    },
+    {
+        date: new Date(currentDate.setHours(6, 0, 0, 0)),
+        today: 1400,
+        tomorrow: 1000
+    },
+    {
+        date: new Date(currentDate.setHours(7, 0, 0, 0)),
+        today: 1450,
+        tomorrow: 1050
+    },
+    {
+        date: new Date(currentDate.setHours(8, 0, 0, 0)),
+        today: 1500,
+        tomorrow: 1100
+    },
+    {
+        date: new Date(currentDate.setHours(9, 0, 0, 0)),
+        today: 1550,
+        tomorrow: 1150
+    },
+    {
+        date: new Date(currentDate.setHours(10, 0, 0, 0)),
+        today: 1600,
+        tomorrow: 1200
+    },
+    {
+        date: new Date(currentDate.setHours(11, 0, 0, 0)),
+        today: 1650,
+        tomorrow: 1250
+    },
+    {
+        date: new Date(currentDate.setHours(12, 0, 0, 0)),
+        today: 1700,
+        tomorrow: 1300
+    },
+    {
+        date: new Date(currentDate.setHours(13, 0, 0, 0)),
+        today: 1750,
+        tomorrow: 1350
+    },
+    {
+        date: new Date(currentDate.setHours(14, 0, 0, 0)),
+        today: 1800,
+        tomorrow: 1400
+    },
+    {
+        date: new Date(currentDate.setHours(15, 0, 0, 0)),
+        today: 1750,
+        tomorrow: 1350
+    },
+    {
+        date: new Date(currentDate.setHours(16, 0, 0, 0)),
+        today: 1700,
+        tomorrow: 1300
+    },
+    {
+        date: new Date(currentDate.setHours(17, 0, 0, 0)),
+        today: 1650,
+        tomorrow: 1250
+    },
+    {
+        date: new Date(currentDate.setHours(18, 0, 0, 0)),
+        today: 1600,
+        tomorrow: 1200
+    },
+    {
+        date: new Date(currentDate.setHours(19, 0, 0, 0)),
+        today: 1700,
+        tomorrow: 1050
+    },
+    {
+        date: new Date(currentDate.setHours(20, 0, 0, 0)),
+        today: 1600,
+        tomorrow: 1000
+    },
+    {
+        date: new Date(currentDate.setHours(21, 0, 0, 0)),
+        today: 1500,
+        tomorrow: 950
+    },
+    {
+        date: new Date(currentDate.setHours(22, 0, 0, 0)),
+        today: 1400,
+        tomorrow: 900
+    },
+    {
+        date: new Date(currentDate.setHours(23, 0, 0, 0)),
+        today: 1300,
+        tomorrow: 850
     }
-}
-
-// Generate mock data for today (24 hours)
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-const chartDataToday = Array.from({ length: 24 }, (_, i) => {
-    const hourDate = new Date(today.getTime());
-    hourDate.setHours(i);
-    return {
-        date: hourDate,
-        total: Math.floor(Math.random() * 1000),
-        level1: Math.floor(Math.random() * 500),
-        level2: Math.floor(Math.random() * 300)
-    };
-});
-
-// Generate mock data for tomorrow (24 hours)
-const tomorrow = new Date();
-tomorrow.setDate(tomorrow.getDate() + 1);
-tomorrow.setHours(0, 0, 0, 0);
-const chartDataTomorrow = Array.from({ length: 24 }, (_, i) => {
-    const hourDate = new Date(tomorrow.getTime());
-    hourDate.setHours(i);
-    return {
-        date: hourDate,
-        total: Math.floor(Math.random() * 1000),
-        level1: Math.floor(Math.random() * 500),
-        level2: Math.floor(Math.random() * 300)
-    };
-});
-
-// Generate mock data for this week (7 days)
-const weekStart = new Date();
-weekStart.setHours(0, 0, 0, 0);
-const chartDataWeek = Array.from({ length: 7 }, (_, i) => {
-    const dayDate = new Date(weekStart.getTime());
-    dayDate.setDate(dayDate.getDate() + i);
-    return {
-        date: dayDate,
-        total: Math.floor(Math.random() * 1000),
-        level1: Math.floor(Math.random() * 500),
-        level2: Math.floor(Math.random() * 300)
-    };
-});
+];
 
 export function ForecastingLineChart() {
-    const [activeChart, setActiveChart] = React.useState<keyof typeof chartConfig>('total');
+    const [activeChart, setActiveChart] =
+        React.useState<keyof typeof chartConfig>('today'); // Need to generalise for more predictions options
 
-    // Calculate totals from the weekly dataset just as a placeholder
-    // (You can change this logic if needed.)
-    const total = React.useMemo(() => {
+    const maximumDay = React.useMemo(() => {
         return {
-            total: chartDataWeek.reduce((acc, curr) => acc + curr.total, 0),
-            level1: chartDataWeek.reduce((acc, curr) => acc + curr.level1, 0),
-            level2: chartDataWeek.reduce((acc, curr) => acc + curr.level2, 0)
+            today: Math.max(...chartDataToday.map((data) => data.today)),
+            tomorrow: Math.max(
+                ...chartDataTomorrow.map((data) => data.tomorrow)
+            )
         };
     }, []);
 
-    // Decide which data to show based on the active chart
     const displayedData = React.useMemo(() => {
-        if (activeChart === 'total') {
-            // Today
-            return chartDataToday;
-        } else if (activeChart === 'level1') {
-            // Tomorrow
-            return chartDataTomorrow;
-        } else {
-            // This Week
-            return chartDataWeek;
-        }
+        return activeChart === 'today' ? chartDataToday : chartDataTomorrow;
     }, [activeChart]);
 
     return (
-        <div className='w-full max-w-[1000px] px-3'>
+        <div className='w-full'>
             <Card>
                 <CardHeader className='flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row'>
                     <div className='flex flex-1 flex-col justify-center gap-1 px-6 py-3 sm:py-5 '>
                         <CardTitle>Future Occupancy</CardTitle>
-                        <CardDescription className='hidden sm:block'>
-                            Forecasting future peak occupancy.
+                        <CardDescription>
+                            Forecasting future peak occupancy
                         </CardDescription>
                     </div>
                     <div className='flex'>
-                        {(['total', 'level1', 'level2'] as const).map((key) => {
+                        {(['today', 'tomorrow'] as const).map((key) => {
                             const chart = key as keyof typeof chartConfig;
                             return (
                                 <button
                                     key={chart}
                                     data-active={activeChart === chart}
-                                    className='flex flex-1 flex-col justify-center gap-1 border-t px-4 py-2 even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-3'
+                                    className='flex flex-1 flex-col justify-center items-center gap-1 border-t px-4 py-2 even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-3'
                                     onClick={() => setActiveChart(chart)}
                                 >
                                     <span className='text-xs text-muted-foreground'>
                                         {chartConfig[chart].label}
+                                        {/*<small>{dateLabel}</small>*/}
                                     </span>
-                                    <span className='text-lg font-bold leading-none sm:text-3xl'>
-                                        {total[key].toLocaleString()}
+                                    <span className='text-lg font-bold sm:text-3xl'>
+                                        {maximumDay[key].toLocaleString()}
                                     </span>
                                 </button>
                             );
                         })}
                     </div>
                 </CardHeader>
-                <CardContent className='py-3'>
+                <CardContent className='py-4'>
                     <ChartContainer
                         config={chartConfig}
-                        className='aspect-auto h-[250px] w-full'
+                        className='aspect-auto h-[300px] w-full'
                     >
-                        <LineChart
+                        <AreaChart
                             accessibilityLayer
                             data={displayedData}
                             margin={{
@@ -170,19 +256,11 @@ export function ForecastingLineChart() {
                                 minTickGap={32}
                                 tickFormatter={(value) => {
                                     const date = new Date(value);
-                                    if (activeChart === 'total' || activeChart === 'level1') {
-                                        // For hours: show "1:00", "2:00", etc.
-                                        return date.toLocaleTimeString('en-US', {
-                                            hour: 'numeric',
-                                            minute: '2-digit',
-                                            hour12: false
-                                        });
-                                    } else {
-                                        // Show "Mon 9th", "Tue 10th", etc.
-                                        const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'short' });
-                                        const dayOfMonth = getDaySuffix(date.getDate());
-                                        return `${dayOfWeek} ${dayOfMonth}`;
-                                    }
+                                    return date.toLocaleTimeString('en-US', {
+                                        hour: 'numeric',
+                                        minute: '2-digit',
+                                        hour12: false
+                                    });
                                 }}
                             />
                             <YAxis
@@ -199,34 +277,31 @@ export function ForecastingLineChart() {
                                         nameKey='views'
                                         labelFormatter={(value) => {
                                             const date = new Date(value);
-                                            if (activeChart === 'total' || activeChart === 'level1') {
-                                                // Include day and month for the tooltip
-                                                return date.toLocaleTimeString('en-US', {
+                                            return date.toLocaleTimeString(
+                                                'en-US',
+                                                {
                                                     hour: 'numeric',
                                                     minute: '2-digit',
                                                     hour12: false,
                                                     month: 'short',
                                                     day: 'numeric',
                                                     year: 'numeric'
-                                                });
-                                            } else {
-                                                // Include weekday and suffix
-                                                const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'short' });
-                                                const dayOfMonth = getDaySuffix(date.getDate());
-                                                return `${dayOfWeek} ${dayOfMonth}, ${date.getFullYear()}`;
-                                            }
+                                                }
+                                            );
                                         }}
                                     />
                                 }
                             />
-                            <Line
+                            <Area
                                 dataKey={activeChart}
                                 type='monotone'
                                 stroke={`var(--color-${activeChart})`}
                                 strokeWidth={2}
+                                fill={`var(--color-${activeChart})`}
+                                fillOpacity={0.2} // Adjust opacity as needed
                                 dot={false}
                             />
-                        </LineChart>
+                        </AreaChart>
                     </ChartContainer>
                 </CardContent>
             </Card>

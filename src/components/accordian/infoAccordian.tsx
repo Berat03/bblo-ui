@@ -7,7 +7,7 @@ import {
 
 export function InfoAccordion() {
     return (
-        <div className='w-screen max-w-[1000px] px-3'>
+        <div className='sm:w-1/2 max-w-[1000px] px-3'>
             <Accordion type='single' collapsible>
                 <AccordionItem value='item-1'>
                     <AccordionTrigger>
