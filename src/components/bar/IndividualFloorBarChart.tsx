@@ -16,8 +16,9 @@ import {
     ChartTooltip,
     ChartTooltipContent
 } from '@/components/ui/chart';
+import { OccupancyDataInterface } from '@/app/App';
 interface IndividualFloorBarChartProps {
-    currentOccupancyData: any;
+    currentOccupancyData: OccupancyDataInterface;
 }
 
 // Dictionary to store maximum values for each floor
@@ -59,7 +60,7 @@ export function IndividualFloorBarChart({
             Empty: Empty
         };
     });
-    const leastActiveFloor = getLeastActiveFloor(chartData)
+    const leastActiveFloor = getLeastActiveFloor(chartData, MAX_SPACES)
     return (
         <Card className='h-[380px]'>
             <CardHeader>

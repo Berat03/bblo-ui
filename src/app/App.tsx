@@ -6,17 +6,11 @@ import { ForecastingLineChart } from '@/components/forecastingLineChart/forecast
 import { Footer } from '@/components/info/footer';
 import useSWR from 'swr';
 
-export interface OccupancyData {
-    Level1: number;
-    Level2e: number;
-    Level3e: number;
-    Level3nsw: number;
-    Level4e: number;
-    Level4nsw: number;
-    total: number;
+export interface OccupancyDataInterface {
+    [key: string]: number; 
 }
 // const fetcher = (...args) => fetch(...args).then(res => res.json())
-const fetcher = async (url: string): Promise<OccupancyData> => {
+const fetcher = async (url: string): Promise<OccupancyDataInterface> => {
     const response = await fetch(url);
     const data = await response.json();
     return {
@@ -31,7 +25,7 @@ const fetcher = async (url: string): Promise<OccupancyData> => {
 };
 
 function App() {
-    const { data, error } = useSWR<OccupancyData>(
+    const { data, error } = useSWR<OccupancyDataInterface>(
         'https://apps.dur.ac.uk/study-spaces/library/bill-bryson/occupancy/display?json&affluence',
         fetcher,
         {

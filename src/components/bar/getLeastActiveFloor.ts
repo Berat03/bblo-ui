@@ -1,23 +1,33 @@
-export const getLeastActiveFloor = (chartData: any): string => {
+interface ChartDataItem { // Didn't use ChartDataInferface because it is too much effort to change the plotting functions too.
+    floorLevel: string;
+    Occupied: number;
+    Empty: number;
+}
+
+export const getLeastActiveFloor = (
+    chartData: ChartDataItem[],
+    MAX_SPACES: Record<string, number>
+): string => {
     if (!chartData || chartData.length === 0) {
         console.log("Invalid or empty chart data.");
-        return "Collaborative spaces can be found primarily on Level 1"
+        return "Collaborative spaces can be found primarily on Level 1";
     }
+
     let leastActiveFloor = "";
     let leastActivityRatio = Infinity;
 
-    chartData.forEach((floor : { floorLevel: string; Occupied: number; Empty: number }) => {
-        const totalSpaces = floor.Occupied + floor.Empty;
-        if (totalSpaces === 0) return; // Skip if there are no spaces to avoid division by zero
+    chartData.forEach(({ floorLevel, Occupied, Empty }) => {
+        const totalSpaces = Occupied + Empty;
 
-        const activityRatio = floor.Occupied / totalSpaces;
+        if (totalSpaces === 0) return; // Avoid division by zero
+
+        const activityRatio = Occupied / totalSpaces;
 
         if (activityRatio < leastActivityRatio) {
             leastActivityRatio = activityRatio;
-            leastActiveFloor = floor.floorLevel;
+            leastActiveFloor = floorLevel; // Use the floor's key as the name
         }
     });
 
     return leastActiveFloor;
 };
-
