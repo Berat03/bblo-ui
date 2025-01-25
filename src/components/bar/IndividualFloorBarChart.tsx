@@ -60,7 +60,7 @@ export function IndividualFloorBarChart({
             Empty: Empty
         };
     });
-    const leastActiveFloor = getLeastActiveFloor(chartData, MAX_SPACES)
+    const leastActiveFloor = getLeastActiveFloor(chartData, MAX_SPACES);
     return (
         <Card className='h-[380px]'>
             <CardHeader>

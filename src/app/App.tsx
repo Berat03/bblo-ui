@@ -7,7 +7,7 @@ import { Footer } from '@/components/info/footer';
 import useSWR from 'swr';
 
 export interface OccupancyDataInterface {
-    [key: string]: number; 
+    [key: string]: number;
 }
 // const fetcher = (...args) => fetch(...args).then(res => res.json())
 const fetcher = async (url: string): Promise<OccupancyDataInterface> => {
