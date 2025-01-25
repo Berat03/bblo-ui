@@ -1,5 +1,5 @@
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
-
+import { getLeastActiveFloor } from './getLeastActiveFloor';
 import {
     Card,
     CardContent,
@@ -44,7 +44,6 @@ export function IndividualFloorBarChart({
         }
     } satisfies ChartConfig;
 
-    // Generate chart data dynamically using MAX_SPACES
     const chartData = Object.entries(MAX_SPACES).map(([key, maxSpaces]) => {
         const Empty = currentOccupancyData[key] || 0;
         const floorLevel = key
@@ -60,7 +59,7 @@ export function IndividualFloorBarChart({
             Empty: Empty
         };
     });
-
+    const leastActiveFloor = getLeastActiveFloor(chartData)
     return (
         <Card className='h-[380px]'>
             <CardHeader>
@@ -98,7 +97,7 @@ export function IndividualFloorBarChart({
             </CardContent>
             <CardFooter className='flex-col items-start gap-2 text-sm'>
                 <div className='flex gap-2 font-medium leading-none whitespace-nowrap'>
-                    Level 3 East Wing is the quietest area.
+                    {leastActiveFloor} is the quietest area.
                 </div>
                 <div className='leading-none text-muted-foreground whitespace-nowrap'>
                     Showing free spaces by section
