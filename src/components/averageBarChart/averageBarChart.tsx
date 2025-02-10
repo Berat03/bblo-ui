@@ -88,7 +88,7 @@ export function AverageBarChart() {
             </CardContent>
             <CardFooter className='flex-col items-start gap-2 text-sm'>
                 <div className='flex gap-2 font-medium leading-none whitespace-nowrap'>
-                    Trending up by 5.2% this month{' '}
+                    Monday is the busiest day of the week{' '}
                     <TrendingUp className='h-4 w-4' />
                 </div>
                 <div className='leading-none text-muted-foreground whitespace-nowrap	'>

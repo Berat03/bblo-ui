@@ -2,9 +2,10 @@ import { AverageBarChart } from '@/components/averageBarChart/averageBarChart';
 import { IndividualFloorBarChart } from '@/components/bar/IndividualFloorBarChart';
 import { ThemeProvider } from '@/components/darkMode/theme-provider';
 import { RadialDonut } from '@/components/donut/radialDonut';
-import { ForecastingLineChart } from '@/components/forecastingLineChart/forecastingLineChart';
 import { Footer } from '@/components/info/footer';
+import { StackAreaChart } from '@/components/stackAreaChart/stackedAreaChart';
 import useSWR from 'swr';
+import { HelloWorld } from '@/components/HelloWorld';
 
 export interface OccupancyDataInterface {
     [key: string]: number;
@@ -58,6 +59,7 @@ function App() {
                     <div className='flex-1'>
                         <RadialDonut currentOccupancyData={occupancyData} />
                     </div>
+                    <HelloWorld />
                     <div className='flex-1'>
                         <IndividualFloorBarChart
                             currentOccupancyData={occupancyData}
@@ -68,9 +70,8 @@ function App() {
                     </div>
                 </div>
 
-                {/* Forecasting section will now match the full width of the three combined cards */}
                 <div className='w-full py-4'>
-                    <ForecastingLineChart />
+                    <StackAreaChart />
                 </div>
 
                 <Footer />

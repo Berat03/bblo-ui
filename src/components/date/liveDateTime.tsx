@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const LiveDateTime = () => {
+export const LiveDateTime = () => { // To specific of an output
     const [date, setDate] = useState(new Date());
 
     useEffect(() => {
@@ -10,7 +10,7 @@ export const LiveDateTime = () => {
             setDate(new Date());
         }, 30000); // Why does this trend slightly behind my laptop's local time?
 
-        return () => clearInterval(intervalId); // clear interval?
+        return () => clearInterval(intervalId);
     }, []);
 
     const formattedDate = date.toLocaleDateString('en-GB', {
