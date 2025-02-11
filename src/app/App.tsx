@@ -5,6 +5,8 @@ import { RadialDonut } from '@/components/donut/radialDonut';
 import { ForecastingLineChart } from '@/components/forecastingLineChart/forecastingLineChart';
 import { Footer } from '@/components/info/footer';
 import useSWR from 'swr';
+import HelloWorld from '@/components/helloWorld';
+
 
 export interface OccupancyDataInterface {
     [key: string]: number;
@@ -63,6 +65,7 @@ function App() {
                             currentOccupancyData={occupancyData}
                         />
                     </div>
+                    <HelloWorld/>
                     <div className='flex-1'>
                         <AverageBarChart />
                     </div>
@@ -72,7 +75,6 @@ function App() {
                 <div className='w-full py-4'>
                     <ForecastingLineChart />
                 </div>
-
                 <Footer />
             </div>
         </ThemeProvider>
