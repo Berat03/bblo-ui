@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 
 export function HelloWorld() {
     const [message, setMessage] = useState<string>('Loading...');
@@ -21,9 +21,11 @@ export function HelloWorld() {
     }, []);
 
     return (
-        <div className="flex-1">
-            {message}
-            {error && <div style={{color: 'red'}}>{error}</div>}
-        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+            <div className="flex-1">
+                {message}
+                {error && <div style={{color: 'red'}}>{error}</div>}
+            </div>
+        </Suspense>
     );
 } 
