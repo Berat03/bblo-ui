@@ -26,11 +26,13 @@ const generateHourlyData = () => {
     const hour = (currentHour + i) % 24;
     data.push({
       hour: `${hour}:00`,
-      future: Math.floor(Math.random() * 300) + 50, // Example random data
+      current: i === 0 ? Math.floor(Math.random() * 300) + 50 : 0, // Only for current hour
+      future: i > 0 ? Math.floor(Math.random() * 300) + 50 : 0, // For future hours
     });
   }
   return data;
 };
+
 
 const chartData = generateHourlyData();
 
