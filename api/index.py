@@ -1,11 +1,15 @@
-from flask import Flask
-#from flask_cors import CORS
+from flask import Flask, send_file
+import os
 
 app = Flask(__name__)
-#CORS(app)
 
 @app.route('/')
-def home():
+def serve_react():
+    # Serve the main React app
+    return send_file('../dist/index.html')
+
+@app.route('/api/hello')
+def hello():
     return 'Hello, World!'
 
 if __name__ == '__main__':
